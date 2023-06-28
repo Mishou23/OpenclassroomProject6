@@ -9,10 +9,47 @@ for (let i = 0; i < fullData.length; i++) {
   image.src = fullData[i].imageUrl;
   title.textContent = fullData[i].title;
 
-  imageContainer.appendChild(image); // Ajoutez l'image au conteneur
-  imageContainer.appendChild(title); // Ajoutez le titre au conteneur
-  gallery.appendChild(imageContainer); // Ajoutez le conteneur à la galerie
+  imageContainer.appendChild(image); 
+  imageContainer.appendChild(title); 
+  gallery.appendChild(imageContainer); 
 }
-
 console.log(fullData);
 
+const allBtn = document.querySelector('.btn.all');
+allBtn.addEventListener('click', () => {
+  for (let i = 0; i < fullData.length; i++) {
+    const imageContainer = document.createElement("div"); 
+    const image = document.createElement("img");
+    const title = document.createElement("p");
+    image.src = fullData[i].imageUrl;
+    title.textContent = fullData[i].title;
+
+    imageContainer.appendChild(image); 
+    imageContainer.appendChild(title); 
+    gallery.appendChild(imageContainer); 
+  }
+});
+const objectBtn = document.querySelector('.btn.objects');
+objectBtn.addEventListener('click', () => {
+  const filterObject = fullData.filter(function(data) {
+    return data.category.name === "Objets";
+  });
+  console.log(filterObject);
+
+});
+const aptBtn = document.querySelector('.btn.apt');
+aptBtn.addEventListener('click', () => {
+  const filterApt = fullData.filter(function(data) {
+    return data.category.name === "Appartements";
+  });
+  console.log(filterApt);
+
+});
+const hotResBtn = document.querySelector('.btn.hotel-res');
+hotResBtn.addEventListener('click', () => {
+  const filterHotRes = fullData.filter(function(data) {
+    return data.category.name === "Hotels & restaurants";
+  });
+  console.log(filterHotRes);
+
+});
