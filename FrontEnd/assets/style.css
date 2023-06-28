@@ -125,18 +125,22 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
 .gallery {
-	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
-}
-
-.gallery img {
+	align-items: flex-start; 
+  }
+  
+  .gallery img {
 	width: 100%;
-
-}
+	display: block;
+	margin-bottom: 10px; 
+  }
+  
+  
 #contact {
 	width: 50%;
 margin: auto;
