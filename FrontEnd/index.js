@@ -14,42 +14,90 @@ for (let i = 0; i < fullData.length; i++) {
   gallery.appendChild(imageContainer); 
 }
 console.log(fullData);
-
 const allBtn = document.querySelector('.btn.all');
 allBtn.addEventListener('click', () => {
+  // Vider la galerie existante
+  gallery.innerHTML = '';
+
+  // Ajouter tous les éléments à la galerie
   for (let i = 0; i < fullData.length; i++) {
-    const imageContainer = document.createElement("div"); 
+    const imageContainer = document.createElement("div");
     const image = document.createElement("img");
     const title = document.createElement("p");
     image.src = fullData[i].imageUrl;
     title.textContent = fullData[i].title;
 
-    imageContainer.appendChild(image); 
-    imageContainer.appendChild(title); 
-    gallery.appendChild(imageContainer); 
+    imageContainer.appendChild(image);
+    imageContainer.appendChild(title);
+    gallery.appendChild(imageContainer);
   }
 });
+
 const objectBtn = document.querySelector('.btn.objects');
 objectBtn.addEventListener('click', () => {
   const filterObject = fullData.filter(function(data) {
     return data.category.name === "Objets";
   });
-  console.log(filterObject);
 
+  // Vider la galerie existante
+  gallery.innerHTML = '';
+
+  // Ajouter les objets filtrés à la galerie
+  for (let i = 0; i < filterObject.length; i++) {
+    const imageContainer = document.createElement("div");
+    const image = document.createElement("img");
+    const title = document.createElement("p");
+    image.src = filterObject[i].imageUrl;
+    title.textContent = filterObject[i].title;
+
+    imageContainer.appendChild(image);
+    imageContainer.appendChild(title);
+    gallery.appendChild(imageContainer);
+  }
 });
+
 const aptBtn = document.querySelector('.btn.apt');
 aptBtn.addEventListener('click', () => {
   const filterApt = fullData.filter(function(data) {
     return data.category.name === "Appartements";
   });
-  console.log(filterApt);
 
+  // Vider la galerie existante
+  gallery.innerHTML = '';
+
+  // Ajouter les appartements filtrés à la galerie
+  for (let i = 0; i < filterApt.length; i++) {
+    const imageContainer = document.createElement("div");
+    const image = document.createElement("img");
+    const title = document.createElement("p");
+    image.src = filterApt[i].imageUrl;
+    title.textContent = filterApt[i].title;
+
+    imageContainer.appendChild(image);
+    imageContainer.appendChild(title);
+    gallery.appendChild(imageContainer);
+  }
 });
+
 const hotResBtn = document.querySelector('.btn.hotel-res');
 hotResBtn.addEventListener('click', () => {
   const filterHotRes = fullData.filter(function(data) {
     return data.category.name === "Hotels & restaurants";
   });
-  console.log(filterHotRes);
 
+  // Vider la galerie existante
+  gallery.innerHTML = '';
+
+  // Ajouter les hôtels et restaurants filtrés à la galerie
+  for (let i = 0; i < filterHotRes.length; i++) {
+    const imageContainer = document.createElement("div");
+    const image = document.createElement("img");
+    const title = document.createElement("p");
+    image.src = filterHotRes[i].imageUrl;
+    title.textContent = filterHotRes[i].title;
+
+    imageContainer.appendChild(image);
+    imageContainer.appendChild(title);
+    gallery.appendChild(imageContainer);
+  }
 });
