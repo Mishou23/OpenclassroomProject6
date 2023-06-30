@@ -34,6 +34,7 @@ allBtn.addEventListener('click', () => {
   }
 });
 //-------------------------------------------------------FILTERS------------------------------------------------------------
+
 const categories = await fetch('http://localhost:5678/api/categories');
 const categoryData = await categories.json();
 const categoryObject = document.querySelector('.btn.objects');

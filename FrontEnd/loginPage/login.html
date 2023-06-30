@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
   <meta name="description" content="">
   <link rel="stylesheet" href="style.css">
+  <script type="module" src="./login.js"></script>
 </head>
 <body>
 <header>
@@ -29,7 +30,7 @@
 <main>
   <section class="logContainer">
     <h2>Log In</h2>
-    <form action="http://localhost:5678/api/users/login" method="POST">
+    <form action="http://localhost:5678/api/users/login">
       <label for="email" class="email">Email</label>
       <input type="email" name="email" class="mail" required>
       <label for="password" class="password">Mot de passe</label>
