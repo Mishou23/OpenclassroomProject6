@@ -9,11 +9,12 @@ for (let i = 0; i < fullData.length; i++) {
   image.src = fullData[i].imageUrl;
   title.textContent = fullData[i].title;
 
-  imageContainer.appendChild(image); 
-  imageContainer.appendChild(title); 
-  gallery.appendChild(imageContainer); 
+  imageContainer.appendChild(image);
+  imageContainer.appendChild(title);
+  gallery.appendChild(imageContainer);
 }
 console.log(fullData);
+
 const allBtn = document.querySelector('.btn.all');
 allBtn.addEventListener('click', () => {
   // Vider la galerie existante
@@ -32,6 +33,16 @@ allBtn.addEventListener('click', () => {
     gallery.appendChild(imageContainer);
   }
 });
+//-------------------------------------------------------FILTERS------------------------------------------------------------
+const categories = await fetch('http://localhost:5678/api/categories');
+const categoryData = await categories.json();
+const categoryObject = document.querySelector('.btn.objects');
+const categoryApt = document.querySelector('.btn.apt');
+const categoryHotRes = document.querySelector('.btn.hotel-res');
+
+categoryObject.innerHTML = categoryData[0].name;
+categoryApt.innerHTML = categoryData[1].name;
+categoryHotRes.innerHTML = categoryData[2].name;
 
 const objectBtn = document.querySelector('.btn.objects');
 objectBtn.addEventListener('click', () => {
@@ -101,3 +112,4 @@ hotResBtn.addEventListener('click', () => {
     gallery.appendChild(imageContainer);
   }
 });
+

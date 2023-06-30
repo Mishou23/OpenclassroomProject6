@@ -61,6 +61,9 @@ header {
 section {
 	margin: 50px 0
 }
+.instaLogo{
+	height: 18px;
+}
 .login{
 	text-decoration: none;
 	color: black;
