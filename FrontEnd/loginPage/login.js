@@ -11,5 +11,5 @@ const login = await fetch('http://localhost:5678/api/users/login', {
   body: JSON.stringify(user)
 });
 
-let result = await response.json();
-console.log(result.message);
+let result = await login.json();
+console.log(result);
