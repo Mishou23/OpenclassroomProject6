@@ -119,11 +119,15 @@ const token = localStorage.getItem('token');
 
 // Vérifie si le jeton existe
 if (token) {
-  const navbar = document.querySelector('.navbar.hidden');
-  navbar.classList.remove('hidden');
-  // Utilisez le jeton comme vous le souhaitez dans votre application
-  console.log('Token:', token);
-} else {
-  // Le jeton n'existe pas, gérer le cas où l'utilisateur n'est pas connecté
-  console.log('Utilisateur non connecté');
-}
+    const navbar = document.querySelector('.navbar.hidden');
+    const allBtns = document.querySelectorAll('.btn');
+    navbar.classList.remove('hidden');
+    allBtns.forEach(btn => {
+      btn.remove();
+    });
+    console.log('Token:', token);
+  } else {
+    // Le jeton n'existe pas, gérer le cas où l'utilisateur n'est pas connecté
+    console.log('Utilisateur non connecté');
+  }
+  

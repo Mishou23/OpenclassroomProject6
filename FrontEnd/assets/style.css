@@ -50,7 +50,7 @@ table {
 }
 /** end reset css**/
 .navbar{
-	padding: 20px;
+	padding: 10px;
 	background-color: black;
 	width: 100%;
 }
@@ -65,6 +65,17 @@ table {
 	border-radius: 40px;
 	font-weight: 500;
 	text-shadow: black 1px 0px 0px;
+}
+.editPhoto{
+	text-decoration: none;
+	color: black;
+	padding-left: 8px;
+}
+.editContainer{
+	display: flex;
+	padding-left: 64px;
+    margin-top: -40px;
+	padding-bottom: 120px;
 }
 .edit{
 	display: flex;
