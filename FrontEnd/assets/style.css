@@ -83,6 +83,26 @@ table {
 	justify-content: space-between;
     padding-right: 15px;
 }
+.galleryEdit{
+	display: flex;
+	align-items: baseline; 
+	justify-content: center;
+}
+.editGalleryContainer{
+	display: flex;
+	align-items: baseline;
+	padding-left: 30px;
+	font-size: 16px;
+}
+.editContainer.hidden{
+	visibility: hidden;
+}
+.editGalleryContainer .icon{
+	font-size: 19px;
+}
+.editGalleryContainer.hidden{
+	visibility: hidden;
+}
 .edit .icon{
 	padding-right: 5px;
 	font-size: 18px;

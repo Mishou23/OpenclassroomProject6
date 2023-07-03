@@ -121,7 +121,11 @@ const token = localStorage.getItem('token');
 if (token) {
     const navbar = document.querySelector('.navbar.hidden');
     const allBtns = document.querySelectorAll('.btn');
+    const photoEdit = document.querySelector('.editContainer.hidden');
+    const galleryEdit = document.querySelector('.editGalleryContainer.hidden');
+    photoEdit.classList.remove('hidden')
     navbar.classList.remove('hidden');
+    galleryEdit.classList.remove('hidden');
     allBtns.forEach(btn => {
       btn.remove();
     });
