@@ -119,6 +119,8 @@ const token = localStorage.getItem('token');
 
 // Vérifie si le jeton existe
 if (token) {
+  const navbar = document.querySelector('.navbar.hidden');
+  navbar.classList.remove('hidden');
   // Utilisez le jeton comme vous le souhaitez dans votre application
   console.log('Token:', token);
 } else {

@@ -2,7 +2,9 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
+*{
+	box-sizing: border-box;
+}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -47,11 +49,48 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+.navbar{
+	padding: 20px;
+	background-color: black;
+	width: 100%;
+}
+.nav-content{
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+}
+.btnPub{
+	padding: 11px 25px;
+	background-color: white;
+	border-radius: 40px;
+	font-weight: 500;
+	text-shadow: black 1px 0px 0px;
+}
+.edit{
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+    padding-right: 15px;
+}
+.edit .icon{
+	padding-right: 5px;
+	font-size: 18px;
+}
+.edition{
+	text-decoration: none;
+	color: white;
+}
+.navbar.hidden{
+	visibility: hidden;
+}
 body {
-	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+}
+.main-ontainer{
+	max-width: 1140px;
+	margin: 0px 150px;
 }
 header {
 	display: flex;
