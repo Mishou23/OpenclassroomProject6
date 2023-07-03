@@ -114,3 +114,14 @@ hotResBtn.addEventListener('click', () => {
   }
 });
 
+// Récupère le jeton (token) du localStorage
+const token = localStorage.getItem('token');
+
+// Vérifie si le jeton existe
+if (token) {
+  // Utilisez le jeton comme vous le souhaitez dans votre application
+  console.log('Token:', token);
+} else {
+  // Le jeton n'existe pas, gérer le cas où l'utilisateur n'est pas connecté
+  console.log('Utilisateur non connecté');
+}

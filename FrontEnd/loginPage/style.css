@@ -95,6 +95,11 @@ label{
     margin-top: 20px;
 }
 
+.mail.error,
+.pass.error {
+  border: 2px solid red;
+}
+
 input{
     padding: 15px 80px;
     margin-bottom: 20px;
