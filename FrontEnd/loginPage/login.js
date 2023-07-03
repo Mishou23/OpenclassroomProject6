@@ -26,7 +26,8 @@ alert(result.userId)
 
     // Redirige vers la page "../index.html"
     window.location.href = "../index.html";
-  } else {
+  } else if(response.status === 401) {
     alert('ERREUR !!!!');
+    window.location.href = "./login.html";
   }
 });
