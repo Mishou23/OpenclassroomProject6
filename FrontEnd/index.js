@@ -119,16 +119,47 @@ const token = localStorage.getItem('token');
 
 // Vérifie si le jeton existe
 if (token) {
-    const navbar = document.querySelector('.navbar.hidden');
-    const allBtns = document.querySelectorAll('.btn');
-    const photoEdit = document.querySelector('.editContainer.hidden');
-    const galleryEdit = document.querySelector('.editGalleryContainer.hidden');
-    photoEdit.classList.remove('hidden')
-    navbar.classList.remove('hidden');
-    galleryEdit.classList.remove('hidden');
-    allBtns.forEach(btn => {
-      btn.remove();
+  const navbar = document.querySelector('.navbar.hidden');
+  const allBtns = document.querySelectorAll('.btn');
+  const photoEdit = document.querySelector('.editContainer.hidden');
+  const galleryEdit = document.querySelector('.editGalleryContainer.hidden');
+  const editGallery = document.querySelector('#editGallery');
+  const galleryPhoto = document.querySelector('.galleryPhoto');
+  const background = document.querySelector('.contentContainer');
+  const allPhotos = document.querySelector('.allPhotos')
+  
+  photoEdit.classList.remove('hidden');
+  navbar.classList.remove('hidden');
+  galleryEdit.classList.remove('hidden');
+  
+  allBtns.forEach(btn => {
+    btn.remove();
+  });
+  editGallery.addEventListener('click', () => {
+    galleryPhoto.classList.add('update');
+    background.classList.add('update');
+    galleryPhoto.innerHTML = '<div class="exit"><div class="exitContainer"><div class="title"><h2>Galerie photo</h2></div><div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div></div><div class="allPhotos"></div><a href="#"><div class="galleryEdited"><button class="btnEdit">Ajouter une photo</button></a> <div class="deleteGallery"><p>Supprimer la galerie</p></div></div>';
+    const allPhotosContainer = document.querySelector('.allPhotos');
+    // Ajouter toutes les images à la galerie
+    for (let i = 0; i < fullData.length; i++) {
+      const imageContainer = document.createElement("div");
+      const image = document.createElement("img");
+      const title = document.createElement("p");
+      image.src = fullData[i].imageUrl;
+      title.textContent = 'éditer';
+      imageContainer.appendChild(image);
+      imageContainer.appendChild(title);
+      allPhotosContainer.appendChild(imageContainer);
+    }
+    const deleteGallery = document.querySelector(".deleteGallery p");
+    deleteGallery.addEventListener('click', () => {
+      fullData.length = 0;
+      gallery.innerHTML = '';
+      allPhotosContainer.innerHTML='';
     });
+    
+  });
+  
     console.log('Token:', token);
   } else {
     // Le jeton n'existe pas, gérer le cas où l'utilisateur n'est pas connecté
