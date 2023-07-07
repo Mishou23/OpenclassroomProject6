@@ -113,8 +113,8 @@ hotResBtn.addEventListener('click', () => {
     gallery.appendChild(imageContainer);
   }
 });
-const galleryEdit = document.querySelector(".galleryEdit");
-galleryEdit.classList.add('hidden');
+const galleryEditMod = document.querySelector(".galleryEdit");
+galleryEditMod.classList.add('hidden');
 // Récupère le jeton (token) du localStorage
 const token = localStorage.getItem('token');
 // Vérifie si le jeton existe
@@ -136,7 +136,7 @@ if (token) {
   photoEdit.classList.remove('hidden');
   navbar.classList.remove('hidden');
   galleryEdit.classList.remove('hidden');
-  
+  galleryEditMod.classList.remove('hidden');
   allBtns.forEach(btn => {
     btn.remove();
   });

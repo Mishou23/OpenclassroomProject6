@@ -24,8 +24,6 @@ connectForm.addEventListener('submit', async (event) => {
   let result = await response.json();
   const token = result.token; // Récupère le jeton (token) de la réponse
   if (response.status === 200) {
-alert('token : ' + token)
-alert(result.userId)
     // Stocke le jeton (token) dans le localStorage
     localStorage.setItem('token', token);
 
