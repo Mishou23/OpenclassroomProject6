@@ -1,10 +1,16 @@
 const connectForm = document.querySelector('form');
+const homepage = document.querySelector('.homepage');
+homepage.addEventListener('click',()=>{
+  token = null;
+  console.log(token);
+})
+
 connectForm.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   let user = {
-    "email": "sophie.bluel@test.tld",
-    "password": "S0phie"
+    "email": document.getElementById("email").value,
+    "password": document.getElementById("password").value
   };
 
   const response = await fetch('http://localhost:5678/api/users/login', {
@@ -16,9 +22,8 @@ connectForm.addEventListener('submit', async (event) => {
   });
 
   let result = await response.json();
-
+  const token = result.token; // Récupère le jeton (token) de la réponse
   if (response.status === 200) {
-    const token = result.token; // Récupère le jeton (token) de la réponse
 alert('token : ' + token)
 alert(result.userId)
     // Stocke le jeton (token) dans le localStorage
