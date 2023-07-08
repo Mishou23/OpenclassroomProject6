@@ -113,6 +113,7 @@ hotResBtn.addEventListener('click', () => {
     gallery.appendChild(imageContainer);
   }
 });
+
 const galleryEditMod = document.querySelector(".galleryEdit");
 galleryEditMod.classList.add('hidden');
 // Récupère le jeton (token) du localStorage
@@ -158,27 +159,119 @@ if (token) {
     }
     const deleteGallery = document.querySelector(".deleteGallery p");
     deleteGallery.addEventListener('click', (event) => {
-      event.preventDefault();
-      fullData.length = 0;
-      gallery.innerHTML = '';
-      allPhotosContainer.innerHTML='';
+      const deleteGallery = document.querySelector(".deleteGallery p");
+      deleteGallery.addEventListener('click', (event) => {
+        event.preventDefault();
+        fullData.length = 0;
+        gallery.innerHTML = '';
+        allPhotosContainer.innerHTML = '';
+      
+        // Rediriger vers "./index.html" après une courte attente
+        setTimeout(() => {
+          window.location.href = "./index.html";
+        }, 500);
+      });
     });
     const editGalleryPhoto = document.querySelector(".btnEdit");
-    const backBtn = document.querySelector(".return a");
-    
-    editGalleryPhoto.addEventListener('click', () => {
-      galleryPhoto.innerHTML = '<div class="arrow"><i class="fa-solid fa-arrow-left" style="color: #353535;"></i></div><div class="exit"><div class="exitContainer"><div class="title"><h2>Ajout photo</h2></div><div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div><div class="dropZone"><span class="selectPhoto">Ajouter Photo</span><div class="dropZoneType" data-label="jpg, png : 4mo max"></div><input type="file" name="myFile" class="dropZoneInput"</div>';
-    });
-    backBtn.addEventListener('click', (event) => {
-      event.preventDefault(); // Empêche le comportement par défaut du lien
-      galleryPhoto.innerHTML = '<div class="exit"><div class="exitContainer"><divclass="title"><h2>Galerie photo</h2></div><div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div></div><div class="allPhotos"></div><div class="galleryEdited"><button class="btnEdit">Ajouter une photo</button><div class="deleteGallery"><p>Supprimer la galerie</p></div></div>';
-    });
-  })
-  console.log('Token:', token);
-} else {
-  // Le jeton n'existe pas, gérer le cas où l'utilisateur n'est pas connecté
-     token = null;
-  console.log('Utilisateur non connecté');
-}
+const backBtn = document.querySelector(".return a");
 
+editGalleryPhoto.addEventListener('click', () => {
+  galleryPhoto.innerHTML = '<div class="arrow"><i class="fa-solid fa-arrow-left" style="color: #000000"></i></div><div class="exit"><div class="exitContainer"><div class="title"><h2>Ajout photo</h2></div><div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div><div class="dropZone"><div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Ajouter Photo</span></div><div class="photoInputs"><div class="photoTitle"><h3>Titre</h3><input type="text" class="title" name="title"></div><div class="photoCategorie"><h3>Categorie</h3><input type="text" class="categorie" name="categorie"></div></div><div class="subBtn"><input type="submit" class="photoSub" value="Valider" name="submit"></div>';
+
+  // Ajout de la fonctionnalité de la zone de dépôt de fichier
+  const dropZone = document.querySelector('.dropZone');
+  const selectPhoto = document.querySelector('.selectPhoto');
+  const gallery = document.querySelector('.gallery');
+
+  let selectedFile = null;
+
+  // Ajout de la fonctionnalité de dépôt de fichier
+  dropZone.addEventListener('drop', (event) => {
+    event.preventDefault();
+
+    const file = event.dataTransfer.files[0];
+
+    if (file.size > 4 * 1024 * 1024) {
+      alert("Le fichier dépasse la taille maximale autorisée (4 Mo).");
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      alert("Le fichier doit être une image.");
+      return;
+    }
+
+    selectedFile = file;
+  });
+
+  dropZone.addEventListener('dragover', (event) => {
+    event.preventDefault();
+  });
+
+  // Ajout de la fonctionnalité d'ajout de photo au clic sur le bouton "+ Ajouter Photo"
+  selectPhoto.addEventListener('click', () => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/jpeg, image/png'; // Limite aux formats JPEG et PNG
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+
+      if (file) {
+        if (file.size > 4 * 1024 * 1024) {
+          alert("Le fichier dépasse la taille maximale autorisée (4 Mo).");
+          return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+          alert("Le fichier doit être une image au format JPEG ou PNG.");
+          return;
+        }
+
+        selectedFile = file;
+      }
+    });
+
+    fileInput.click();
+  });
+
+  // Ajout de la fonctionnalité d'ajout de photo au clic sur le bouton "Valider"
+  const submitBtn = document.querySelector('.subBtn input[type="submit"]');
+  submitBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const titleInput = document.querySelector('.photoTitle input');
+    const selectedTitle = titleInput.value.trim();
+
+    if (selectedFile && selectedTitle) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imageContainer = document.createElement('div');
+        const image = document.createElement('img');
+        const title = document.createElement('p');
+
+        image.src = reader.result;
+        title.textContent = selectedTitle;
+
+        imageContainer.appendChild(image);
+        imageContainer.appendChild(title);
+        gallery.appendChild(imageContainer);
+      };
+      reader.readAsDataURL(selectedFile);
+
+      // Réinitialiser les valeurs
+      selectedFile = null;
+      titleInput.value = '';
+    } else {
+      alert("Veuillez sélectionner une photo et saisir un titre avant de valider.");
+    }
+  });
+});
+
+backBtn.addEventListener('click', (event) => {
+  event.preventDefault(); // Empêche le comportement par défaut du lien
+  window.location.href = "./index.html";
+});
+  })
+   }
+    
   
