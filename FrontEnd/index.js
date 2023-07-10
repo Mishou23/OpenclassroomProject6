@@ -94,7 +94,7 @@ aptBtn.addEventListener('click', () => {
 const hotResBtn = document.querySelector('.btn.hotel-res');
 hotResBtn.addEventListener('click', () => {
   const filterHotRes = fullData.filter(function(data) {
-    returndata.category.name === "Hotels & restaurants";
+    return data.category.name === "Hotels & restaurants";
   });
 
   // Vider la galerie existante
@@ -176,13 +176,17 @@ if (token) {
     const backBtn = document.querySelector(".return a");
     
     editGalleryPhoto.addEventListener('click', () => {
-      galleryPhoto.innerHTML = '<div class="arrow"><i class="fa-solid fa-arrow-left" style="color: #000000"></i></div><div class="exit"><div class="exitContainer"><div class="title"><h2>Ajout photo</h2></div><div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div><div class="dropZone"><div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Ajouter Photo</span></div><div class="photoInputs"><div class="photoTitle"><h3>Titre</h3><input type="text" class="title" name="title"></div><div class="photoCategorie"><h3>Categorie</h3><input type="text" class="categorie" name="categorie"></div></div><div class="subBtn"><input type="submit" class="photoSub" value="Valider" name="submit"></div>';
+      galleryPhoto.innerHTML = '<div class="arrow"><i class="fa-solid fa-arrow-left" style="color: #000000"></i></div><div class="exitPhoto"><div class="exitContainer"><div class="ajoutPhotoTitle"><h2>Ajout photo</h2></div><div class="photoReturn"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div><div class="dropZone"><div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Ajouter Photo</span></div><div class="photoInputs"><div class="photoTitle"><h3>Titre</h3><input type="text" class="title" name="title"></div><div class="photoCategorie"><h3>Categorie</h3><input type="text" class="categorie" name="categorie"></div></div><div class="subBtn"><input type="submit" class="photoSub" value="Valider" name="submit"></div>';
     
       // Ajout de la fonctionnalité de la zone de dépôt de fichier
       const dropZone = document.querySelector('.dropZone');
       const selectPhoto = document.querySelector('.selectPhoto');
       const gallery = document.querySelector('.gallery');
-    
+      backBtn.addEventListener('click', (event) => {
+        event.preventDefault(); // Empêche le comportement par défaut du lien
+       alert('hello World')
+      });
+      
       let selectedFile = null;
     
       // Fonction pour afficher la photo sélectionnée dans la dropZone
@@ -287,12 +291,6 @@ if (token) {
         }
       });
     });
-    
-    backBtn.addEventListener('click', (event) => {
-      event.preventDefault(); // Empêche le comportement par défaut du lien
-      window.location.href = "./index.html";
-    });
-    
   })
    }
     

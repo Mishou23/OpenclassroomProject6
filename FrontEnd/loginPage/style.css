@@ -73,7 +73,7 @@ form{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
+    padding-top: 35px;
     flex-direction: column;
 }
 label{
@@ -103,7 +103,7 @@ label{
 
 input{
     padding: 15px 80px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     border: none;
     box-shadow: 0 3px 18px -9px #777;
 }

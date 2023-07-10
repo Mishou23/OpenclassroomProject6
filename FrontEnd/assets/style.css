@@ -218,6 +218,7 @@ table {
 .navbar.hidden {
 	visibility: hidden;
 }
+/* -------------------------------------------------------------MODALE---------------------------------------------------------------------------- */
 
 .galleryPhoto.update {
 	position: fixed;
@@ -231,46 +232,45 @@ table {
 }
 
 .galleryPhoto.update .exit {
-    font-size: 25px;
     z-index: 1;
-	top: 377px;
+	margin-top: -346px;
     position: absolute;
     text-decoration: none;
-	width: 50%;
-}
+	width: 46%;
+}  
 
 .galleryPhoto.update::after {
 	content: "";
 	position: absolute;
 	width: 51%;
-	height: 55%;
+	height: 650px;
 	background-color: white;
 	border-radius: 10px;
 }
 
-.galleryPhoto.update .exit .title h2{
+ .galleryPhoto.update .exit .title h2{
 color: black;
 font-size: 26px;
 font-weight: 500;
 font-family:"Work Sans";
-}
+} 
 .return{
 	position: relative;
-    top: -55px;
+	font-size: 17px;
+    top: -40px;
 }
-.exitContainer .title{
+ .exitContainer .title{
 	display: flex;
-	padding-left: 50px;
 	justify-content: center;
 	width: 100%;
-}
+	margin-bottom: 8px;
+} 
 
 .exitContainer{
-	position: relative;
-    width: 96%;
     display: flex;
     justify-content: space-between;
-}
+	width: 100%;
+} 
 .allPhotos{
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-column-gap: 10px;
@@ -278,6 +278,7 @@ font-family:"Work Sans";
     align-items: flex-start;
     z-index: 2;
     display: grid;
+	margin-bottom: 25px;
     position: absolute;
     width: 39%;
     max-width: 275px;
@@ -292,7 +293,7 @@ font-family:"Work Sans";
 	position: absolute;
 	border-bottom: 1px solid rgba(179, 179, 179, 1);
 	width: 100%;
-	bottom: 0;
+	bottom: -27px;
 	left: 0;
 	z-index: 1;
 }
@@ -310,8 +311,7 @@ font-family:"Work Sans";
 .galleryEdited{
 	position: absolute;
     z-index: 2;
-	margin: 23em -100px;
-    bottom: 0px;
+    margin-bottom: -376px;
 }
 .deleteGallery {
 	color: red;
@@ -321,6 +321,13 @@ font-family:"Work Sans";
     padding-top: 20px;
 }
 /* --------------------------------------------------------------------------------AJOUT PHOTO---------------------------------------------------------------------------------------------- */
+.exitPhoto{
+	z-index: 1;
+    margin-top: 40px;
+    position: absolute;
+    text-decoration: none;
+    width: 46%;
+}
 .arrow{
 	position: relative;
     z-index: 2;
@@ -329,9 +336,27 @@ font-family:"Work Sans";
     font-size: 24px;
     left: 0;
 }
+.ajoutPhotoTitle h2{
+	color: black;
+    font-size: 26px;
+    font-weight: 500;
+    font-family: "Work Sans";
+}
+.ajoutPhotoTitle{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-bottom: 10px;
+	margin-bottom: 25px;
+}
+.photoReturn{
+    position: relative;
+    font-size: 17px;
+	top: -25px;
+}
 .dropZone{
-	height: 200px;
-    max-width: 398px;
+	height: 166px;
+    max-width: 450px;
     display: flex;
     align-items: end;
     justify-content: center;
@@ -339,9 +364,9 @@ font-family:"Work Sans";
     text-align: center;
     font-size: 20px;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 4px;
     background-color: rgba(232, 241, 246, 1);
-    margin: 20px auto;
+    margin: 0px auto;
     font-weight: 500;
 }
 .selectPhoto{
@@ -369,7 +394,7 @@ font-family:"Work Sans";
     font-weight: 700;
     color: white;
     background-color: lightgrey;
-    margin: 2em auto;
+    margin: 1em auto;
     width: 180px;
 	border: none;
 	padding: 10px;
@@ -381,7 +406,7 @@ font-family:"Work Sans";
 .photoInputs {
     display: flex;
     flex-direction: column;
-    padding: 10px 73px;
+    padding: 5px 73px;
     justify-content: start;
 }
 .photoTitle , .photoCategorie{
