@@ -325,40 +325,63 @@ if (token) {
     
       // Ajout de la fonctionnalité d'ajout de photo au clic sur le bouton "Valider"
       const submitBtn = document.querySelector('.subBtn input[type="submit"]');
-      submitBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-    
-        const titleInput = document.querySelector('.photoTitle input');
-        const selectedTitle = titleInput.value.trim();
-    
-        if (selectedFile && selectedTitle) {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const imageContainer = document.createElement('div');
-            const image = document.createElement('img');
-            const title = document.createElement('p');
-    
-            image.src = reader.result;
-            title.textContent = selectedTitle;
-    
-            imageContainer.appendChild(image);
-            imageContainer.appendChild(title);
-            gallery.appendChild(imageContainer);
-          };
-          reader.readAsDataURL(selectedFile);
-    
-          // Réinitialiser les valeurs
-          selectedFile = null;
-          titleInput.value = '';
-          dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div>'
-            // Réinitialiser les valeurs
-            selectedFile = null;
-            titleInput.value = '';
-            dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Ajouter Photo</span>';
+submitBtn.addEventListener('click', async (event) => {
+  event.preventDefault();
+
+  const titleInput = document.querySelector('.photoTitle input');
+  const selectedTitle = titleInput.value.trim();
+  const selectedCategory = categoryInput.value; // Retrieve the selected category
+
+  if (selectedFile && selectedTitle) {
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const imageContainer = document.createElement('div');
+      const image = document.createElement('img');
+      const title = document.createElement('p');
+
+      image.src = reader.result;
+      title.textContent = selectedTitle;
+
+      imageContainer.appendChild(image);
+      imageContainer.appendChild(title);
+      gallery.appendChild(imageContainer);
+
+      // Prepare the data to be sent to the API
+      const formData = new FormData();
+      formData.append('title', selectedTitle);
+      formData.append('imageUrl', selectedFile.name);
+      formData.append('categoryId', selectedCategory);
+
+      try {
+        const response = await fetch('http://localhost:5678/api/works', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          // API call was successful
+          const data = await response.json();
+          console.log('API response:', data);
         } else {
-            alert("Veuillez sélectionner une photo et saisir un titre avant de valider.");
+          // API call failed
+          console.error('API request failed:', response.status);
+          console.log(selectedFile.name)
         }
-      });
+      } catch (error) {
+        console.error('API request failed:', error);
+      }
+    };
+    reader.readAsDataURL(selectedFile);
+
+    // Reset values
+   
+    titleInput.value = '';
+    categoryInput.value = '';
+    dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Ajouter Photo</span>';
+  } else {
+    alert("Please select a photo and enter a title before submitting.");
+  }
+});
     });
   })
    }
