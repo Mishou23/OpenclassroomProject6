@@ -176,71 +176,77 @@ if (token) {
     const backBtn = document.querySelector(".return a");
     editGalleryPhoto.addEventListener('click', () => {
       galleryPhoto.innerHTML = `
-        <div class="arrow">
-          <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+      <div class="arrow">
+        <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+      </div>
+      <div class="exitPhoto">
+        <div class="exitContainer">
+          <div class="ajoutPhotoTitle">
+            <h2>Ajout photo</h2>
+          </div>
+          <div class="photoReturn">
+            <a href="./index.html">
+              <i class="fa-solid fa-xmark" style="color: #000000;"></i>
+            </a>
+          </div>
         </div>
-        <div class="exitPhoto">
-          <div class="exitContainer">
-            <div class="ajoutPhotoTitle">
-              <h2>Ajout photo</h2>
-            </div>
-            <div class="photoReturn">
-              <a href="./index.html">
-                <i class="fa-solid fa-xmark" style="color: #000000;"></i>
-              </a>
+        <div class="dropZone">
+          <div class="imageIcon">
+            <i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i>
+          </div>
+          <span class="selectPhoto">+ Ajouter Photo</span>
+        </div>
+        <div class="photoInputs">
+          <div class="photoTitle">
+            <h3>Titre</h3>
+            <input type="text" class="title" name="title">
+          </div>
+          <div class="photoCategorie">
+            <h3>Categorie</h3>
+            <div class="dropdown">
+              <input type="text" class="categories" name="categorie" readonly>
+              <i class="fa-solid fa-chevron-down"></i>
+              <ul class="categoryOptions hidden">
+                <li value="Objets">Objets</li>
+                <li value="Appartements">Appartements</li>
+                <li value="Hotels & Restaurants">Hotels & Restaurants</li>
+              </ul>
             </div>
           </div>
-          <div class="dropZone">
-            <div class="imageIcon">
-              <i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i>
-            </div>
-            <span class="selectPhoto">+ Ajouter Photo</span>
-          </div>
-          <div class="photoInputs">
-            <div class="photoTitle">
-              <h3>Titre</h3>
-              <input type="text" class="title" name="title">
-            </div>
-            <div class="photoCategorie">
-              <h3>Categorie</h3>
-              <div class="dropdown">
-                <input type="text" class="categories" name="categorie" readonly>
-                <i class="fa-solid fa-chevron-down"></i>
-                <ul class="categoryOptions hidden">
-                  <li value="Objets">Objets</li>
-                  <li value="Appartements">Appartements</li>
-                  <li value="Hotels & Restaurants">Hotels & Restaurants</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="subBtn">
-            <input type="submit" class="photoSub" value="Valider" name="submit">
-          </div>
-        </div>`;
-        
-           
-        const categoryInput = document.querySelector('input.categories');
-        const dropdown = document.querySelector('.dropdown');
-        const chevronIcon = document.querySelector('.fa-chevron-down');
-        const categoryOptions = document.querySelector('.categoryOptions');
-  
+        </div>
+        <div class="subBtn">
+          <input type="submit" class="photoSub" value="Valider" name="submit">
+        </div>
+      </div>`;
+    
+    const categoryInput = document.querySelector('input.categories');
+    const dropdown = document.querySelector('.dropdown');
+    const chevronIcon = document.querySelector('.fa-chevron-down');
+    const categoryOptions = document.querySelector('.categoryOptions');
+    
     function toggleCategoryOptions() {
       categoryOptions.classList.toggle('hidden');
       chevronIcon.classList.toggle('rotate');
     }
-  
+    
     dropdown.addEventListener('click', toggleCategoryOptions);
-  
+    
     const categoryOptionItems = categoryOptions.querySelectorAll('li');
     categoryOptionItems.forEach(option => {
       option.addEventListener('click', () => {
         const selectedCategory = option.getAttribute('value');
         categoryInput.value = selectedCategory;
         toggleCategoryOptions();
+    
+        // Hide the dropdown after an option is clicked
+        categoryOptions.classList.add('hidden');
+        chevronIcon.classList.remove('rotate');
+    
+        // Display the selected option in the input field
+        categoryInput.value = selectedCategory;
       });
     });
-  
+    
       // Ajout de la fonctionnalité de la zone de dépôt de fichier
       const dropZone = document.querySelector('.dropZone');
       const selectPhoto = document.querySelector('.selectPhoto');
