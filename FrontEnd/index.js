@@ -219,7 +219,28 @@ if (token) {
           </div>
         </div>`;
         
-    
+           
+        const categoryInput = document.querySelector('input.categories');
+        const dropdown = document.querySelector('.dropdown');
+        const chevronIcon = document.querySelector('.fa-chevron-down');
+        const categoryOptions = document.querySelector('.categoryOptions');
+  
+    function toggleCategoryOptions() {
+      categoryOptions.classList.toggle('hidden');
+      chevronIcon.classList.toggle('rotate');
+    }
+  
+    dropdown.addEventListener('click', toggleCategoryOptions);
+  
+    const categoryOptionItems = categoryOptions.querySelectorAll('li');
+    categoryOptionItems.forEach(option => {
+      option.addEventListener('click', () => {
+        const selectedCategory = option.getAttribute('value');
+        categoryInput.value = selectedCategory;
+        toggleCategoryOptions();
+      });
+    });
+  
       // Ajout de la fonctionnalité de la zone de dépôt de fichier
       const dropZone = document.querySelector('.dropZone');
       const selectPhoto = document.querySelector('.selectPhoto');
