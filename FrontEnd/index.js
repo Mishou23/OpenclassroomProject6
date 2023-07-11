@@ -116,12 +116,9 @@ hotResBtn.addEventListener('click', () => {
 
 const galleryEditMod = document.querySelector(".galleryEdit");
 galleryEditMod.classList.add('hidden');
-
-// Retrieve the token from localStorage
-let token = localStorage.getItem('token');
-
-// Check if the token exists
-
+// Récupère le jeton (token) du localStorage
+const token = localStorage.getItem('token');
+// Vérifie si le jeton existe
 if (token) {
   const navbar = document.querySelector('.navbar.hidden');
   const allBtns = document.querySelectorAll('.btn');
@@ -131,82 +128,52 @@ if (token) {
   const galleryPhoto = document.querySelector('.galleryPhoto');
   const background = document.querySelector('.contentContainer');
   const logout = document.querySelector('.logout');
-
   logout.innerHTML = 'logout';
   logout.addEventListener('click', () => {
-    // Remove the token from localStorage
+    // Supprimer le jeton du localStorage
     localStorage.removeItem('token');
     token = null;
   });
-
   photoEdit.classList.remove('hidden');
   navbar.classList.remove('hidden');
   galleryEdit.classList.remove('hidden');
   galleryEditMod.classList.remove('hidden');
-
   allBtns.forEach(btn => {
     btn.remove();
   });
-
   editGallery.addEventListener('click', () => {
     galleryPhoto.classList.add('update');
     background.classList.add('update');
-
-    galleryPhoto.innerHTML = `
-      <div class="exit">
-        <div class="exitContainer">
-          <div class="title">
-            <h2>Galerie photo</h2>
-          </div>
-          <div class="return">
-            <a href="./index.html">
-              <i class="fa-solid fa-xmark" style="color: #000000;"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="allPhotos"></div>
-      <div class="galleryEdited">
-        <button class="btnEdit">Ajouter une photo</button>
-        <div class="deleteGallery">
-          <p>Supprimer la galerie</p>
-        </div>
-      </div>
-    `;
-
+    galleryPhoto.innerHTML = '<div class="exit"><div class="exitContainer"><div class="title"><h2>Galerie photo</h2></div><div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div></div><div class="allPhotos"></div><div class="galleryEdited"><button class="btnEdit">Ajouter une photo</button><div class="deleteGallery"><p>Supprimer la galerie</p></div></div>';
     const allPhotosContainer = document.querySelector('.allPhotos');
-
-    // Add all images to the gallery
+    // Ajouter toutes les images à la galerie
     for (let i = 0; i < fullData.length; i++) {
       const imageContainer = document.createElement("div");
       const image = document.createElement("img");
       const title = document.createElement("p");
-
       image.src = fullData[i].imageUrl;
       title.textContent = 'éditer';
-
       imageContainer.appendChild(image);
       imageContainer.appendChild(title);
       allPhotosContainer.appendChild(imageContainer);
     }
-
     const deleteGallery = document.querySelector(".deleteGallery p");
     deleteGallery.addEventListener('click', (event) => {
-      event.preventDefault();
-
-      fullData.length = 0;
-      gallery.innerHTML = '';
-      allPhotosContainer.innerHTML = '';
-
-      // Redirect to "./index.html" after a short delay
-      setTimeout(() => {
-        window.location.href = "./index.html";
-      }, 500);
+      const deleteGallery = document.querySelector(".deleteGallery p");
+      deleteGallery.addEventListener('click', (event) => {
+        event.preventDefault();
+        fullData.length = 0;
+        gallery.innerHTML = '';
+        allPhotosContainer.innerHTML = '';
+      
+        // Rediriger vers "./index.html" après une courte attente
+        setTimeout(() => {
+          window.location.href = "./index.html";
+        }, 500);
+      });
     });
-
     const editGalleryPhoto = document.querySelector(".btnEdit");
-    const backBtn = document.querySelector(".arrow");
-
+    const backBtn = document.querySelector(".return a");
     editGalleryPhoto.addEventListener('click', () => {
       galleryPhoto.innerHTML = `
         <div class="arrow">
@@ -252,141 +219,121 @@ if (token) {
           </div>
         </div>`;
         
-      const categoryInput = document.querySelector('input.categories');
-      const dropdown = document.querySelector('.dropdown');
-      const chevronIcon = document.querySelector('.fa-chevron-down');
-      const categoryOptions = document.querySelector('.categoryOptions');
-
-  function toggleCategoryOptions() {
-    categoryOptions.classList.toggle('hidden');
-    chevronIcon.classList.toggle('rotate');
-  }
-
-  dropdown.addEventListener('click', toggleCategoryOptions);
-
-  const categoryOptionItems = categoryOptions.querySelectorAll('li');
-  categoryOptionItems.forEach(option => {
-    option.addEventListener('click', () => {
-      const selectedCategory = option.getAttribute('value');
-      categoryInput.value = selectedCategory;
-      toggleCategoryOptions();
-    });
-  });
-
-  // Adding functionality to the file drop zone
-  const dropZone = document.querySelector('.dropZone');
-  const selectPhoto = document.querySelector('.selectPhoto');
-  const gallery = document.querySelector('.gallery');
-  const submitBtn = document.querySelector('.photoSub');
-  const titleInput = document.querySelector('.title');
-
-  backBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    history.back();
-  });
-
-  let selectedFile = null;
-
-  // Function to display the selected photo in the dropZone
-  const displaySelectedPhoto = (file) => {
-    const imageContainer = document.createElement('div');
-    const image = document.createElement('img');
-    image.src = URL.createObjectURL(file);
-    imageContainer.appendChild(image);
-    dropZone.innerHTML = '';
-    dropZone.appendChild(imageContainer);
-  };
-
-  // Adding functionality for file drop
-  dropZone.addEventListener('drop', (event) => {
-    event.preventDefault();
-
-    const file = event.dataTransfer.files[0];
-
-    if (file.size > 4 * 1024 * 1024) {
-      alert("The file exceeds the maximum allowed size (4 MB).");
-      return;
-    }
-
-    if (!file.type.startsWith("image/")) {
-      alert("The file must be an image.");
-      return;
-    }
-
-    selectedFile = file;
-
-    // Display the selected photo in the dropZone
-    displaySelectedPhoto(file);
-  });
-
-  dropZone.addEventListener('dragover', (event) => {
-    event.preventDefault();
-  });
-
-  // Adding functionality to add photo on the "+ Ajouter Photo" button click
-  selectPhoto.addEventListener('click', () => {
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = 'image/jpeg, image/png'; // Limit to JPEG and PNG formats
-    fileInput.addEventListener('change', () => {
-      const file = fileInput.files[0];
-
-      if (file) {
-        if (file.size > 4 * 1024 * 1024) {
-          alert("The file exceeds the maximum allowed size (4 MB).");
-          return;
-        }
-
-        if (!file.type.startsWith("image/")) {
-          alert("The file must be an image in JPEG or PNG format.");
-          return;
-        }
-
-        selectedFile = file;
-
-        // Display the selected photo in the dropZone
-        displaySelectedPhoto(file);
-      }
-    });
-
-    fileInput.click();
-  });
-
-  // Adding functionality to add photo and handle submission on the "Valider" button click
-  submitBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-
-    const selectedTitle = titleInput.value.trim();
-
-    if (selectedFile && selectedTitle) {
-      const reader = new FileReader();
-      reader.onload = () => {
+    
+      // Ajout de la fonctionnalité de la zone de dépôt de fichier
+      const dropZone = document.querySelector('.dropZone');
+      const selectPhoto = document.querySelector('.selectPhoto');
+      const gallery = document.querySelector('.gallery');
+      backBtn.addEventListener('click', (event) => {
+        event.preventDefault(); // Empêche le comportement par défaut du lien
+       alert('hello World')
+      });
+      
+      let selectedFile = null;
+    
+      // Fonction pour afficher la photo sélectionnée dans la dropZone
+      const displaySelectedPhoto = (file) => {
         const imageContainer = document.createElement('div');
         const image = document.createElement('img');
-        const title = document.createElement('p');
-        const category = document.createElement('p');
-
-        image.src = reader.result;
-        title.textContent = selectedTitle;
-        category.textContent = categoryInput.value;
-
+        image.src = URL.createObjectURL(file);
         imageContainer.appendChild(image);
-        imageContainer.appendChild(title);
-        imageContainer.appendChild(category);
-        gallery.appendChild(imageContainer);
+        dropZone.innerHTML = '';
+        dropZone.appendChild(imageContainer);
       };
-      reader.readAsDataURL(selectedFile);
-
-      // Reset values
-      selectedFile = null;
-      titleInput.value = '';
-      categoryInput.value = '';
-      dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Ajouter Photo</span>';
-    } else {
-      alert("Please select a photo and enter a title before submitting.");
-    }
-  });
-});
-});
-}
+    
+      // Ajout de la fonctionnalité de dépôt de fichier
+      dropZone.addEventListener('drop', (event) => {
+        event.preventDefault();
+    
+        const file = event.dataTransfer.files[0];
+    
+        if (file.size > 4 * 1024 * 1024) {
+          alert("Le fichier dépasse la taille maximale autorisée (4 Mo).");
+          return;
+        }
+    
+        if (!file.type.startsWith("image/")) {
+          alert("Le fichier doit être une image.");
+          return;
+        }
+    
+        selectedFile = file;
+    
+        // Afficher la photo sélectionnée dans le dropZone
+        displaySelectedPhoto(file);
+      });
+    
+      dropZone.addEventListener('dragover', (event) => {
+        event.preventDefault();
+      });
+    
+      // Ajout de la fonctionnalité d'ajout de photo au clic sur le bouton "+ Ajouter Photo"
+      selectPhoto.addEventListener('click', () => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/jpeg, image/png'; // Limite aux formats JPEG et PNG
+        fileInput.addEventListener('change', () => {
+          const file = fileInput.files[0];
+    
+          if (file) {
+            if (file.size > 4 * 1024 * 1024) {
+              alert("Le fichier dépasse la taille maximale autorisée (4 Mo).");
+              return;
+            }
+    
+            if (!file.type.startsWith("image/")) {
+              alert("Le fichier doit être une image au format JPEG ou PNG.");
+              return;
+            }
+    
+            selectedFile = file;
+    
+            // Afficher la photo sélectionnée dans le dropZone
+            displaySelectedPhoto(file);
+          }
+        });
+    
+        fileInput.click();
+      });
+    
+      // Ajout de la fonctionnalité d'ajout de photo au clic sur le bouton "Valider"
+      const submitBtn = document.querySelector('.subBtn input[type="submit"]');
+      submitBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+    
+        const titleInput = document.querySelector('.photoTitle input');
+        const selectedTitle = titleInput.value.trim();
+    
+        if (selectedFile && selectedTitle) {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const imageContainer = document.createElement('div');
+            const image = document.createElement('img');
+            const title = document.createElement('p');
+    
+            image.src = reader.result;
+            title.textContent = selectedTitle;
+    
+            imageContainer.appendChild(image);
+            imageContainer.appendChild(title);
+            gallery.appendChild(imageContainer);
+          };
+          reader.readAsDataURL(selectedFile);
+    
+          // Réinitialiser les valeurs
+          selectedFile = null;
+          titleInput.value = '';
+          dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div>'
+            // Réinitialiser les valeurs
+            selectedFile = null;
+            titleInput.value = '';
+            dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Ajouter Photo</span>';
+        } else {
+            alert("Veuillez sélectionner une photo et saisir un titre avant de valider.");
+        }
+      });
+    });
+  })
+   }
+    
   
