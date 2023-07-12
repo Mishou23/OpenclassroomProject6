@@ -146,35 +146,51 @@ if (token) {
     background.classList.add('update');
     galleryPhoto.innerHTML = '<div class="exit"><div class="exitContainer"><div class="title"><h2>Galerie photo</h2></div><div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div></div><div class="allPhotos"></div><div class="galleryEdited"><button class="btnEdit">Ajouter une photo</button><div class="deleteGallery"><p>Supprimer la galerie</p></div></div>';
     const allPhotosContainer = document.querySelector('.allPhotos');
+    
     // Ajouter toutes les images à la galerie
     for (let i = 0; i < fullData.length; i++) {
       const imageContainer = document.createElement("div");
       const image = document.createElement("img");
+      const deleteButton = document.createElement("button"); // Create the delete button
+      const deleteIcon = document.createElement("i"); // Create the delete icon
       const title = document.createElement("p");
+      title.textContent="éditer"
       image.src = fullData[i].imageUrl;
-      title.textContent = 'éditer';
+      
+      deleteIcon.className = "fa-solid fa-trash-can";
+      deleteButton.appendChild(deleteIcon); // Append the delete icon to the delete button
+      deleteButton.classList.add("delete-button"); // Add a class for styling
+      
+      // Add event listener to delete the photo on button click
+      deleteButton.addEventListener('click', () => {
+        // Code to delete the photo goes here
+        // You can use `fullData[i]` to access the data of the corresponding photo
+        // For example: const photoId = fullData[i].id; (assuming there's an `id` property in the photo data)
+      });
+      
       imageContainer.appendChild(image);
-      imageContainer.appendChild(title);
+      imageContainer.appendChild(title)
+      imageContainer.appendChild(deleteButton); // Append the delete button to the image container
       allPhotosContainer.appendChild(imageContainer);
+     
     }
-    const deleteGallery = document.querySelector(".deleteGallery p");
-    deleteGallery.addEventListener('click', (event) => {
+  
       const deleteGallery = document.querySelector(".deleteGallery p");
       deleteGallery.addEventListener('click', (event) => {
         event.preventDefault();
         fullData.length = 0;
         gallery.innerHTML = '';
         allPhotosContainer.innerHTML = '';
-      
         // Rediriger vers "./index.html" après une courte attente
         setTimeout(() => {
           window.location.href = "./index.html";
         }, 500);
-      });
     });
+    
     const editGalleryPhoto = document.querySelector(".btnEdit");
     const backBtn = document.querySelector(".return a");
     editGalleryPhoto.addEventListener('click', () => {
+      const galleryPhoto = document.querySelector(".galleryPhoto");
       galleryPhoto.innerHTML = `
       <div class="arrow">
         <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
@@ -191,6 +207,7 @@ if (token) {
           </div>
         </div>
         <div class="dropZone">
+        <div class="imageContainer"></div>
           <div class="imageIcon">
             <i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i>
           </div>
@@ -199,12 +216,12 @@ if (token) {
         <div class="photoInputs">
           <div class="photoTitle">
             <h3>Titre</h3>
-            <input type="text" class="title" name="title">
+            <input type="text" class="title" id="photoTitle" name="title">
           </div>
           <div class="photoCategorie">
             <h3>Categorie</h3>
             <div class="dropdown">
-              <input type="text" class="categories" name="categorie" readonly>
+              <input type="text" class="categories" name="categorie" id="photoCategory" readonly>
               <i class="fa-solid fa-chevron-down"></i>
               <ul class="categoryOptions hidden">
                 <li value="Objets">Objets</li>
@@ -219,7 +236,7 @@ if (token) {
         </div>
       </div>`;
     
-    const categoryInput = document.querySelector('input.categories');
+    const categoryInput = document.querySelector('#photoCategory');
     const dropdown = document.querySelector('.dropdown');
     const chevronIcon = document.querySelector('.fa-chevron-down');
     const categoryOptions = document.querySelector('.categoryOptions');
@@ -260,8 +277,9 @@ if (token) {
     
       // Fonction pour afficher la photo sélectionnée dans la dropZone
       const displaySelectedPhoto = (file) => {
-        const imageContainer = document.createElement('div');
+        const imageContainer = document.querySelector('.imageContainer');
         const image = document.createElement('img');
+        imageContainer.classList.add('styled');
         image.src = URL.createObjectURL(file);
         imageContainer.appendChild(image);
         dropZone.innerHTML = '';
@@ -348,10 +366,10 @@ submitBtn.addEventListener('click', async (event) => {
 
       // Prepare the data to be sent to the API
       const formData = new FormData();
-      formData.append('title', selectedTitle);
-      formData.append('imageUrl', selectedFile.name);
-      formData.append('categoryId', selectedCategory);
-
+      formData.append('image', document.querySelector('.dropZone img').src);
+      formData.append('title', document.querySelector('#photoTitle').value);
+      formData.append('category', document.querySelector('#photoCategory').value);
+      
       try {
         const response = await fetch('http://localhost:5678/api/works', {
           method: 'POST',
@@ -386,4 +404,4 @@ submitBtn.addEventListener('click', async (event) => {
   })
    }
     
-  
+ 

@@ -243,7 +243,7 @@ table {
 	content: "";
 	position: absolute;
 	width: 51%;
-	height: 530px;
+	height: 580px;
 	background-color: white;
 	border-radius: 10px;
 }
@@ -263,7 +263,7 @@ font-family:"Work Sans";
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	margin-bottom: 8px;
+	margin-bottom: 93px;
 } 
 
 .exitContainer{
@@ -280,13 +280,13 @@ font-family:"Work Sans";
     display: grid;
 	margin-bottom: 25px;
     position: absolute;
-    width: 39%;
-    max-width: 275px;
+	max-width: 370px;
 }
 .allPhotos img {
     width: 100%;
     display: block;
     margin-bottom: 1px;
+	position: relative;
 }
 .allPhotos::before{
 	content: "";
@@ -311,7 +311,7 @@ font-family:"Work Sans";
 .galleryEdited{
 	position: absolute;
     z-index: 2;
-    margin-bottom: -376px;
+    margin-bottom: -480px;
 }
 .deleteGallery {
 	color: red;
@@ -320,6 +320,17 @@ font-family:"Work Sans";
     font-weight: 500;
     padding-top: 20px;
 }
+.delete-button {
+    background-color: black;
+    color: white;
+    padding: 0px 3px;
+    position: absolute;
+    border-radius: 3px;
+	margin: -99px 45px;
+  }
+  .delete-button i{
+	font-size: 9px;
+  }
 /* --------------------------------------------------------------------------------AJOUT PHOTO---------------------------------------------------------------------------------------------- */
 .exitPhoto{
 	z-index: 1;
@@ -471,6 +482,14 @@ font-family:"Work Sans";
   
   .categoryOptions li:hover {
 	background-color: #f2f2f2;
+  }
+  .imageContainer.styled{
+	object-fit: cover;
+	width: 30%;
+  }
+  .imageContainer img{
+	width: 100%;
+	margin: -29px;
   }
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------ */
 body {
