@@ -189,93 +189,98 @@ if (token) {
     
     const editGalleryPhoto = document.querySelector(".btnEdit");
     const backBtn = document.querySelector(".return a");
+    
     editGalleryPhoto.addEventListener('click', () => {
       const galleryPhoto = document.querySelector(".galleryPhoto");
       galleryPhoto.innerHTML = `
-      <div class="arrow">
-        <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
-      </div>
-      <div class="exitPhoto">
-        <div class="exitContainer">
-          <div class="ajoutPhotoTitle">
-            <h2>Ajout photo</h2>
-          </div>
-          <div class="photoReturn">
-            <a href="./index.html">
-              <i class="fa-solid fa-xmark" style="color: #000000;"></i>
-            </a>
-          </div>
+        <div class="arrow">
+          <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
         </div>
-        <div class="dropZone">
-        <div class="imageContainer"></div>
-          <div class="imageIcon">
-            <i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i>
-          </div>
-          <span class="selectPhoto">+ Ajouter Photo</span>
-        </div>
-        <div class="photoInputs">
-          <div class="photoTitle">
-            <h3>Titre</h3>
-            <input type="text" class="title" id="photoTitle" name="title">
-          </div>
-          <div class="photoCategorie">
-            <h3>Categorie</h3>
-            <div class="dropdown">
-              <input type="text" class="categories" name="categorie" id="photoCategory" readonly>
-              <i class="fa-solid fa-chevron-down"></i>
-              <ul class="categoryOptions hidden">
-                <li value="Objets">Objets</li>
-                <li value="Appartements">Appartements</li>
-                <li value="Hotels & Restaurants">Hotels & Restaurants</li>
-              </ul>
+        <div class="exitPhoto">
+          <div class="exitContainer">
+            <div class="ajoutPhotoTitle">
+              <h2>Ajouter Photo</h2>
+            </div>
+            <div class="photoReturn">
+              <a href="./index.html">
+                <i class="fa-solid fa-xmark" style="color: #000000;"></i>
+              </a>
             </div>
           </div>
+          <div class="dropZone">
+            <div class="imageContainer"></div>
+            <div class="imageIcon">
+              <i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i>
+            </div>
+            <span class="selectPhoto">+ Ajouter Photo</span>
+          </div>
+          <form>
+            <div class="photoInputs">
+              <div class="photoTitle">
+                <h3>Title</h3>
+                <input type="text" class="title" id="photoTitle" name="title">
+              </div>
+              <div class="photoCategory">
+                <h3>Category</h3>
+                <div class="dropdown">
+                  <input type="text" class="categories" name="category" id="photoCategory" readonly>
+                  <i class="fa-solid fa-chevron-down"></i>
+                  <ul class="categoryOptions hidden">
+                    <li value="Objects">Objects</li>
+                    <li value="Apartments">Apartments</li>
+                    <li value="Hotels & Restaurants">Hotels & Restaurants</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="subBtn">
+              <input type="submit" class="photoSub" value="Valider" name="submit">
+            </div>
+          </form>
         </div>
-        <div class="subBtn">
-          <input type="submit" class="photoSub" value="Valider" name="submit">
-        </div>
-      </div>`;
+      `;
     
-    const categoryInput = document.querySelector('#photoCategory');
-    const dropdown = document.querySelector('.dropdown');
-    const chevronIcon = document.querySelector('.fa-chevron-down');
-    const categoryOptions = document.querySelector('.categoryOptions');
+      const categoryInput = document.querySelector('#photoCategory');
+      const dropdown = document.querySelector('.dropdown');
+      const chevronIcon = document.querySelector('.fa-chevron-down');
+      const categoryOptions = document.querySelector('.categoryOptions');
     
-    function toggleCategoryOptions() {
-      categoryOptions.classList.toggle('hidden');
-      chevronIcon.classList.toggle('rotate');
-    }
+      function toggleCategoryOptions() {
+        categoryOptions.classList.toggle('hidden');
+        chevronIcon.classList.toggle('rotate');
+      }
     
-    dropdown.addEventListener('click', toggleCategoryOptions);
+      dropdown.addEventListener('click', toggleCategoryOptions);
     
-    const categoryOptionItems = categoryOptions.querySelectorAll('li');
-    categoryOptionItems.forEach(option => {
-      option.addEventListener('click', () => {
-        const selectedCategory = option.getAttribute('value');
-        categoryInput.value = selectedCategory;
-        toggleCategoryOptions();
+      const categoryOptionItems = categoryOptions.querySelectorAll('li');
+      categoryOptionItems.forEach(option => {
+        option.addEventListener('click', () => {
+          const selectedCategory = option.getAttribute('value');
+          categoryInput.value = selectedCategory;
+          toggleCategoryOptions();
     
-        // Hide the dropdown after an option is clicked
-        categoryOptions.classList.add('hidden');
-        chevronIcon.classList.remove('rotate');
+          // Hide the dropdown after an option is clicked
+          categoryOptions.classList.add('hidden');
+          chevronIcon.classList.remove('rotate');
     
-        // Display the selected option in the input field
-        categoryInput.value = selectedCategory;
+          // Display the selected option in the input field
+          categoryInput.value = selectedCategory;
+        });
       });
-    });
     
-      // Ajout de la fonctionnalité de la zone de dépôt de fichier
+      // Adding file drop zone functionality
       const dropZone = document.querySelector('.dropZone');
       const selectPhoto = document.querySelector('.selectPhoto');
       const gallery = document.querySelector('.gallery');
+    
       backBtn.addEventListener('click', (event) => {
-        event.preventDefault(); // Empêche le comportement par défaut du lien
-       alert('hello World')
+        event.preventDefault(); // Prevent the default behavior of the link
+        alert('Hello, World!');
       });
-      
+    
       let selectedFile = null;
     
-      // Fonction pour afficher la photo sélectionnée dans la dropZone
+      // Function to display the selected photo in the drop zone
       const displaySelectedPhoto = (file) => {
         const imageContainer = document.querySelector('.imageContainer');
         const image = document.createElement('img');
@@ -286,25 +291,25 @@ if (token) {
         dropZone.appendChild(imageContainer);
       };
     
-      // Ajout de la fonctionnalité de dépôt de fichier
+      // Adding file drop functionality
       dropZone.addEventListener('drop', (event) => {
         event.preventDefault();
     
         const file = event.dataTransfer.files[0];
     
         if (file.size > 4 * 1024 * 1024) {
-          alert("Le fichier dépasse la taille maximale autorisée (4 Mo).");
+          alert("The file exceeds the maximum allowed size (4 MB).");
           return;
         }
     
         if (!file.type.startsWith("image/")) {
-          alert("Le fichier doit être une image.");
+          alert("The file must be an image.");
           return;
         }
     
         selectedFile = file;
     
-        // Afficher la photo sélectionnée dans le dropZone
+        // Display the selected photo in the drop zone
         displaySelectedPhoto(file);
       });
     
@@ -312,28 +317,28 @@ if (token) {
         event.preventDefault();
       });
     
-      // Ajout de la fonctionnalité d'ajout de photo au clic sur le bouton "+ Ajouter Photo"
+      // Adding photo upload functionality on clicking the "+ Add Photo" button
       selectPhoto.addEventListener('click', () => {
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
-        fileInput.accept = 'image/jpeg, image/png'; // Limite aux formats JPEG et PNG
+        fileInput.accept = 'image/jpeg, image/png'; // Limit to JPEG and PNG formats
         fileInput.addEventListener('change', () => {
           const file = fileInput.files[0];
     
           if (file) {
             if (file.size > 4 * 1024 * 1024) {
-              alert("Le fichier dépasse la taille maximale autorisée (4 Mo).");
+              alert("The file exceeds the maximum allowed size (4 MB).");
               return;
             }
     
             if (!file.type.startsWith("image/")) {
-              alert("Le fichier doit être une image au format JPEG ou PNG.");
+              alert("The file must be an image in JPEG or PNG format.");
               return;
             }
     
             selectedFile = file;
     
-            // Afficher la photo sélectionnée dans le dropZone
+            // Display the selected photo in the drop zone
             displaySelectedPhoto(file);
           }
         });
@@ -341,9 +346,12 @@ if (token) {
         fileInput.click();
       });
     
-      // Ajout de la fonctionnalité d'ajout de photo au clic sur le bouton "Valider"
-      const submitBtn = document.querySelector('.subBtn input[type="submit"]');
-submitBtn.addEventListener('click', async (event) => {
+  
+// Adding photo upload functionality on clicking the "Submit" button
+const submitBtn = document.querySelector('.subBtn input[type="submit"]');
+const form = document.querySelector('form');
+
+form.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const titleInput = document.querySelector('.photoTitle input');
@@ -366,13 +374,16 @@ submitBtn.addEventListener('click', async (event) => {
 
       // Prepare the data to be sent to the API
       const formData = new FormData();
-      formData.append('image', document.querySelector('.dropZone img').src);
-      formData.append('title', document.querySelector('#photoTitle').value);
-      formData.append('category', document.querySelector('#photoCategory').value);
-      
+      formData.append('image', selectedFile);
+      formData.append('title', selectedTitle);
+      formData.append('category', selectedCategory);
+
       try {
         const response = await fetch('http://localhost:5678/api/works', {
           method: 'POST',
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
           body: formData,
         });
 
@@ -383,7 +394,7 @@ submitBtn.addEventListener('click', async (event) => {
         } else {
           // API call failed
           console.error('API request failed:', response.status);
-          console.log(selectedFile.name)
+          console.log(selectedFile.name);
         }
       } catch (error) {
         console.error('API request failed:', error);
@@ -392,7 +403,6 @@ submitBtn.addEventListener('click', async (event) => {
     reader.readAsDataURL(selectedFile);
 
     // Reset values
-   
     titleInput.value = '';
     categoryInput.value = '';
     dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Ajouter Photo</span>';
@@ -402,6 +412,4 @@ submitBtn.addEventListener('click', async (event) => {
 });
     });
   })
-   }
-    
- 
+}    
