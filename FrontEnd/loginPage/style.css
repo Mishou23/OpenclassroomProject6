@@ -100,13 +100,13 @@ label{
 	color: red;
     font-size: 12px;
     position: relative;
-    margin-top: -18px;
+    margin-top: -8px;
     display: block;
     left: -106px;
-    top: -23px;
+    top: -30px;
   }
   #password-error{
-	top: 0px;
+	top: -10px;
   }
 
 input{
