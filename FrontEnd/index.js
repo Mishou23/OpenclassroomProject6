@@ -163,14 +163,32 @@ if (token) {
       deleteIcon.className = "fa-solid fa-trash-can";
       deleteButton.appendChild(deleteIcon); // Append the delete icon to the delete button
       deleteButton.classList.add("delete-button"); // Add a class for styling
-    
-      // Add event listener to delete the photo on button click
-      deleteButton.addEventListener('click', () => {
-        // Code to delete the photo goes here
-        // You can use `fullData[i]` to access the data of the corresponding photo
-        // For example: const photoId = fullData[i].id; (assuming there's an `id` property in the photo data)
-      });
-    
+   // Add event listener to delete the photo on button click
+deleteButton.addEventListener('click', () => {
+  const photoId = fullData[i].id; 
+
+  // Make a DELETE request to the API endpoint to delete the photo
+  fetch(`http://localhost:5678/api/works/${photoId}`, {
+    method: 'DELETE',
+  })
+  .then(response => {
+    if (response.ok) {
+      // Photo deletion successful
+      // Remove the photo from the fullData array
+      fullData.splice(i, 1);
+      // Remove the image container from the gallery
+      imageContainer.remove();
+      console.log('SUCCESS!!')
+    } else {
+      // Photo deletion failed
+      console.error('Failed to delete photo:', response.status);
+    }
+  })
+  .catch(error => {
+    console.error('Failed to delete photo:', error);
+  });
+});
+
       imageContainer.appendChild(image);
       imageContainer.appendChild(title);
       imageContainer.appendChild(deleteButton); // Append the delete button to the image container
