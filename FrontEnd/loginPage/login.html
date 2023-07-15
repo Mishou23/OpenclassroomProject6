@@ -33,8 +33,10 @@
     <form action="http://localhost:5678/api/users/login" method="post">
       <label for="email" class="email">E-mail</label>
       <input type="email" name="email" id="email" class="mail" required>
+      <span class="error-message" id="email-error"></span> <!-- Add error message element for email -->
       <label for="password" class="password">Mot de passe</label>
       <input type="password" name="password" id="password" class="pass" required>
+      <span class="error-message" id="password-error"></span> <!-- Add error message element for password -->
       <input type="submit" id="log-in" value="Se connecter" class="btn">
     </form>
     <a href="#" class="oubliPass"><p>Mot de passe oublié</p></a>

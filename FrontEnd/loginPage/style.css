@@ -96,10 +96,18 @@ label{
     margin-top: 20px;
 }
 
-.mail.error,
-.pass.error {
-  border: 2px solid red;
-}
+.error-message {
+	color: red;
+    font-size: 12px;
+    position: relative;
+    margin-top: -18px;
+    display: block;
+    left: -106px;
+    top: -23px;
+  }
+  #password-error{
+	top: 0px;
+  }
 
 input{
     padding: 15px 80px;

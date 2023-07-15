@@ -30,7 +30,28 @@ connectForm.addEventListener('submit', async (event) => {
     // Redirige vers la page "../index.html"
     window.location.href = "../index.html";
   } else if(response.status === 401) {
-    alert('ERREUR !!!!');
-    window.location.href = "./login.html";
+    const errorMessages = document.querySelectorAll('.error-message');
+    errorMessages.forEach((errorMessage) => {
+      errorMessage.remove();
+    })
+    
+  // Display an error message underneath the inputs
+const emailErrorMessage = document.createElement('span');
+emailErrorMessage.classList.add('error-message');
+emailErrorMessage.textContent = 'Incorrect email.';
+emailErrorMessage.id = 'email-error';
+connectForm.insertBefore(emailErrorMessage, document.getElementById('password').previousSibling);
+
+const passwordErrorMessage = document.createElement('span');
+passwordErrorMessage.classList.add('error-message');
+passwordErrorMessage.textContent = 'Incorrect password.';
+passwordErrorMessage.id = 'password-error';
+connectForm.insertBefore(passwordErrorMessage, document.getElementById('log-in'));
+
+
+    // Clear the input fields
+    document.getElementById("email").value = '';
+    document.getElementById("password").value = '';
+  
   }
 });
