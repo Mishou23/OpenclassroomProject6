@@ -142,12 +142,13 @@ if (token) {
     btn.remove();
   });
 
-  //------------------------------------------------------------------Gallery Modal------------------------------------------------------------------------------------//
+  //------------------------------------------------------------------Gallery Modale------------------------------------------------------------------------------------//
+  galleryPhoto.style.setProperty('--my-variable', 'your-value');
   editGallery.addEventListener('click', handleEditGallery);
   function handleEditGallery() {
     galleryPhoto.classList.add('update');
     background.classList.add('update');
-    galleryPhoto.innerHTML = '<div class="exit"><div class="exitContainer"><div class="title"><h2>Galerie photo</h2></div><div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div></div><div class="allPhotos"></div><div class="galleryEdited"><button class="btnEdit">Ajouter une photo</button><div class="deleteGallery"><p>Supprimer la galerie</p></div></div>';
+    galleryPhoto.innerHTML = '<div class="galleryWindow"><div class="exit"><div class="exitContainer"><div class="title"><h2>Galerie photo</h2></div><div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div><div class="allPhotos"></div><div class="galleryEdited"><button class="btnEdit">Ajouter une photo</button><div class="deleteGallery"><p>Supprimer la galerie</p></div></div></div></div>';
     const allPhotosContainer = document.querySelector('.allPhotos');
   
     // Add all the images to the gallery
@@ -159,36 +160,37 @@ if (token) {
       const title = document.createElement("p");
       title.textContent = "éditer";
       image.src = fullData[i].imageUrl;
-    
+  
       deleteIcon.className = "fa-solid fa-trash-can";
       deleteButton.appendChild(deleteIcon); // Append the delete icon to the delete button
       deleteButton.classList.add("delete-button"); // Add a class for styling
-   // Add event listener to delete the photo on button click
-deleteButton.addEventListener('click', () => {
-  const photoId = fullData[i].id; 
-
-  // Make a DELETE request to the API endpoint to delete the photo
-  fetch(`http://localhost:5678/api/works/${photoId}`, {
-    method: 'DELETE',
-  })
-  .then(response => {
-    if (response.ok) {
-      // Photo deletion successful
-      // Remove the photo from the fullData array
-      fullData.splice(i, 1);
-      // Remove the image container from the gallery
-      imageContainer.remove();
-      console.log('SUCCESS!!')
-    } else {
-      // Photo deletion failed
-      console.error('Failed to delete photo:', response.status);
-    }
-  })
-  .catch(error => {
-    console.error('Failed to delete photo:', error);
-  });
-});
-
+  
+      // Add event listener to delete the photo on button click
+      deleteButton.addEventListener('click', () => {
+        const photoId = fullData[i].id;
+  
+        // Make a DELETE request to the API endpoint to delete the photo
+        fetch(`http://localhost:5678/api/works/${photoId}`, {
+          method: 'DELETE',
+        })
+        .then(response => {
+          if (response.ok) {
+            // Photo deletion successful
+            // Remove the photo from the fullData array
+            fullData.splice(i, 1);
+            // Remove the image container from the gallery
+            imageContainer.remove();
+            console.log('SUCCESS!!');
+          } else {
+            // Photo deletion failed
+            console.error('Failed to delete photo:', response.status);
+          }
+        })
+        .catch(error => {
+          console.error('Failed to delete photo:', error);
+        });
+      });
+  
       imageContainer.appendChild(image);
       imageContainer.appendChild(title);
       imageContainer.appendChild(deleteButton); // Append the delete button to the image container
@@ -207,11 +209,22 @@ deleteButton.addEventListener('click', () => {
       }, 500);
     });
   
+    // Add event listener to detect click outside .galleryWindow
+    document.addEventListener('mousedown', (event) => {
+      const isOutsideGalleryWindow = !event.target.closest('.galleryWindow');
+      if (isOutsideGalleryWindow) {
+        // Redirect to index.html
+        window.location.href = './index.html';
+      }
+    });
+  
+
     //----------------------------------------------------------------------Add Photo to Gallery--------------------------------------------------------------------------------//
     const editGalleryPhoto = document.querySelector(".btnEdit");
     editGalleryPhoto.addEventListener('click', () => {
       const galleryPhoto = document.querySelector(".galleryPhoto");
       galleryPhoto.innerHTML = `
+      <div class="galleryWindow">
         <div class="arrow">
           <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
         </div>
@@ -220,7 +233,7 @@ deleteButton.addEventListener('click', () => {
             <div class="ajoutPhotoTitle">
               <h2>Ajouter Photo</h2>
             </div>
-            <div class="photoReturn">
+            <div class="return">
               <a href="./index.html">
                 <i class="fa-solid fa-xmark" style="color: #000000;"></i>
               </a>
@@ -257,40 +270,44 @@ deleteButton.addEventListener('click', () => {
             </div>
           </form>
         </div>
-      `;
-      
+        </div>
+      `
       const categoryInput = document.querySelector('#photoCategory');
       const dropdown = document.querySelector('.dropdown');
       const chevronIcon = document.querySelector('.fa-chevron-down');
       const categoryOptions = document.querySelector('.categoryOptions');
       const backBtn = document.querySelector('.arrow');
-
+     
       backBtn.addEventListener('click', (event) => {
         event.preventDefault();
         handleEditGallery(); // Call the function to go back to the previous code
       });
+      
       function toggleCategoryOptions() {
         categoryOptions.classList.toggle('hidden');
         chevronIcon.classList.toggle('rotate');
       }
-    
+      
       dropdown.addEventListener('click', toggleCategoryOptions);
-    
+      
       const categoryOptionItems = categoryOptions.querySelectorAll('li');
       categoryOptionItems.forEach(option => {
         option.addEventListener('click', () => {
           const selectedCategory = option.getAttribute('value');
           categoryInput.value = selectedCategory;
-          toggleCategoryOptions();
-    
+      
           // Hide the dropdown after an option is clicked
-          categoryOptions.classList.add('hidden');
-          chevronIcon.classList.remove('rotate');
-    
+          setTimeout(() => {
+            categoryOptions.classList.add('hidden');
+            chevronIcon.classList.remove('rotate');
+          }, 200);
+      
           // Display the selected option in the input field
           categoryInput.value = selectedCategory;
         });
       });
+      
+
     
       // Adding file drop zone functionality
       const dropZone = document.querySelector('.dropZone');
