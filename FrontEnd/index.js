@@ -172,7 +172,11 @@ if (token) {
         // Make a DELETE request to the API endpoint to delete the photo
         fetch(`http://localhost:5678/api/works/${photoId}`, {
           method: 'DELETE',
-        })
+          headers: {
+            'Authorization': 'Bearer '+ token
+          },
+          body:`${photoId}`
+         })
         .then(response => {
           if (response.ok) {
             // Photo deletion successful
@@ -189,7 +193,7 @@ if (token) {
         .catch(error => {
           console.error('Failed to delete photo:', error);
         });
-      });
+      })
   
       imageContainer.appendChild(image);
       imageContainer.appendChild(title);
@@ -385,8 +389,7 @@ if (token) {
   
       // Adding photo upload functionality 
       const form = document.querySelector('form');
-    
-      form.addEventListener('submit', async (event) => {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
     
         const titleInput = document.querySelector('.photoTitle input');
@@ -417,8 +420,7 @@ if (token) {
               const response = await fetch('http://localhost:5678/api/works', {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'multipart/form-data'
-                },
+                  'Authorization': 'Bearer '+ token                },
                 body: formData,
               });
     
@@ -429,7 +431,7 @@ if (token) {
               } else {
                 // API call failed
                 console.error('API request failed:', response.status);
-                console.log(selectedFile.name);
+                console.log(token);
               }
             } catch (error) {
               console.error('API request failed:', error);
