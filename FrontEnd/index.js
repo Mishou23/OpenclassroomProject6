@@ -194,7 +194,7 @@ if (token) {
           console.error('Failed to delete photo:', error);
         });
       })
-  
+  //------------------------------------------------DELETE BUTTON---------------------------------------------------------------------------------------
       imageContainer.appendChild(image);
       imageContainer.appendChild(title);
       imageContainer.appendChild(deleteButton); // Append the delete button to the image container
