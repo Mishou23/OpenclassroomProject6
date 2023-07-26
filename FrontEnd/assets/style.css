@@ -168,7 +168,7 @@ table {
 	display: flex;
 	padding-left: 64px;
 	margin-top: -40px;
-	padding-bottom: 120px;
+	padding-bottom: 40px;
 }
 
 .edit {
@@ -183,9 +183,11 @@ table {
 	align-items: baseline;
 	justify-content: center;
 }
-.galleryEdit.hidden{
+
+.galleryEdit.hidden {
 	display: block;
 }
+
 .editGalleryContainer {
 	display: flex;
 	align-items: baseline;
@@ -217,7 +219,9 @@ table {
 
 .navbar.hidden {
 	visibility: hidden;
+	display: none;
 }
+
 /* -------------------------------------------------------------GALLERY-MODALE---------------------------------------------------------------------------- */
 
 .galleryPhoto.update {
@@ -233,15 +237,15 @@ table {
 
 .galleryPhoto.update .exit {
 	z-index: 1;
-    margin-top: 150px;
-    position: absolute;
-    text-decoration: none;
+	margin-top: 150px;
+	position: absolute;
+	text-decoration: none;
 	justify-content: center;
 	display: flex;
-    width: 96%;
-}  
+	width: 96%;
+}
 
-.galleryWindow{
+.galleryWindow {
 	content: "";
 	position: absolute;
 	width: 51%;
@@ -250,52 +254,57 @@ table {
 	border-radius: 10px;
 }
 
- .galleryPhoto.update .exit .title h2{
-color: black;
-font-size: 26px;
-font-weight: 500;
-font-family:"Work Sans";
-} 
-.return{
+.galleryPhoto.update .exit .title h2 {
+	color: black;
+	font-size: 26px;
+	font-weight: 500;
+	font-family: "Work Sans";
+}
+
+.return {
 	position: relative;
 	font-size: 17px;
-    top: -40px;
+	top: -40px;
 }
- .exitContainer .title{
+
+.exitContainer .title {
 	display: flex;
 	justify-content: center;
 	width: 100%;
 	margin-bottom: 93px;
 	position: relative;
-	top:-10px;
-} 
+	top: -10px;
+}
 
-.exitContainer{
-    display: flex;
-    justify-content: space-between;
+.exitContainer {
+	display: flex;
+	justify-content: space-between;
 	width: 100%;
 	position: relative;
-    top: -90px;
-} 
-.allPhotos{
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-    align-items: flex-start;
-    z-index: 2;
-    display: grid;
+	top: -90px;
+}
+
+.allPhotos {
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	align-items: flex-start;
+	z-index: 2;
+	display: grid;
 	margin-bottom: 25px;
-    position: absolute;
+	position: absolute;
 	max-width: 370px;
 	top: -32px;
 }
+
 .allPhotos img {
-    width: 100%;
-    display: block;
-    margin-bottom: 1px;
+	width: 100%;
+	display: block;
+	margin-bottom: 1px;
 	position: relative;
 }
-.allPhotos::before{
+
+.allPhotos::before {
 	content: "";
 	position: absolute;
 	border-bottom: 1px solid rgba(179, 179, 179, 1);
@@ -304,104 +313,118 @@ font-family:"Work Sans";
 	left: 0;
 	z-index: 1;
 }
-.btnEdit{
+
+.btnEdit {
 	font-family: 'Syne';
-    font-weight: 700;
-    color: white;
-    background-color: #1D6154;
-    padding: 8px;
-    width: 209px;
-    text-align: center;
-    border-radius: 60px;
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	padding: 8px;
+	width: 209px;
+	text-align: center;
+	border-radius: 60px;
 	border: none;
 }
-.galleryEdited{
+
+.galleryEdited {
 	position: absolute;
-    z-index: 2;
+	z-index: 2;
 	bottom: -292px;
 }
+
 .deleteGallery {
 	color: red;
-    font-family: 'Syne';
-    text-align: center;
-    font-weight: 500;
-    padding-top: 20px;
+	font-family: 'Syne';
+	text-align: center;
+	font-weight: 500;
+	padding-top: 20px;
 }
+
 .delete-button {
-    background-color: black;
-    color: white;
-    padding: 0px 3px;
-    position: absolute;
-    border-radius: 3px;
+	background-color: black;
+	color: white;
+	padding: 0px 3px;
+	position: absolute;
+	border-radius: 3px;
 	margin: -99px 45px;
-  }
-  .delete-button i{
+}
+
+.delete-button i {
 	font-size: 9px;
-  }
+}
+
 /* --------------------------------------------------------------------------------AJOUT PHOTO---------------------------------------------------------------------------------------------- */
-.exitPhoto{
+.exitPhoto {
 	z-index: 1;
 	margin-top: 133px;
-    position: absolute;
-    text-decoration: none;
+	position: absolute;
+	text-decoration: none;
 	justify-content: center;
 	display: flex;
-    width: 96%;
+	width: 96%;
 	flex-direction: column;
 }
-.arrow{
+
+.arrow {
 	position: relative;
-    z-index: 2;
-    top: 24px;
-    font-size: 17px;
-    left: 17px;
+	z-index: 2;
+	top: 24px;
+	font-size: 17px;
+	left: 17px;
 }
-.ajoutPhotoTitle h2{
+
+.ajoutPhotoTitle h2 {
 	color: black;
-    font-size: 26px;
-    font-weight: 500;
-    font-family: "Work Sans";
+	font-size: 26px;
+	font-weight: 500;
+	font-family: "Work Sans";
 }
-.ajoutPhotoTitle{
+
+.ajoutPhotoTitle {
 	display: flex;
 	justify-content: center;
 	width: 100%;
 	margin-bottom: 10px;
 	margin-bottom: 25px;
 }
-.photoReturn{
-    position: relative;
-    font-size: 17px;
+
+.photoReturn {
+	position: relative;
+	font-size: 17px;
 	top: -25px;
 }
-.dropZone{
+
+.dropZone {
 	height: 166px;
-    max-width: 450px;
+	max-width: 450px;
 	padding: 25px 101px;
-    display: flex;
-    align-items: end;
-    justify-content: center;
-    text-align: center;
-    font-size: 20px;
-    cursor: pointer;
+	display: flex;
+	align-items: end;
+	justify-content: center;
+	text-align: center;
+	font-size: 20px;
+	cursor: pointer;
 	position: relative;
 	top: -71px;
-    border-radius: 4px;
-    background-color: rgba(232, 241, 246, 1);
-    margin: 0px auto;
-    font-weight: 500;
+	border-radius: 4px;
+	background-color: rgba(232, 241, 246, 1);
+	margin: 0px auto;
+	font-weight: 500;
 }
-.selectPhoto{
+
+.selectPhoto {
 	padding: 10px 30px;
 	background-color: lightgray;
 	border-radius: 40px;
 	font-size: 14px;
 	color: rgba(48, 102, 133, 1);
 }
-.dropZoneInput{
+
+.dropZoneInput {
 	display: none;
 }
-.dropZoneType{
+
+.dropZoneType {
 	width: 40%;
 	height: 100%;
 	border-radius: 10px;
@@ -411,64 +434,73 @@ font-family:"Work Sans";
 	background-color: rgba(232, 241, 246, 1);
 	position: relative;
 }
-.photoSub{
+
+.photoSub {
 	font-family: 'Syne';
-    font-weight: 700;
-    color: white;
-    background-color: lightgrey;
-    margin: 1em auto;
-    width: 180px;
+	font-weight: 700;
+	color: white;
+	background-color: lightgrey;
+	margin: 1em auto;
+	width: 180px;
 	border: none;
 	padding: 10px;
-    border-radius: 60px;
+	border-radius: 60px;
 }
-.subBtn{
+
+.subBtn {
 	text-align: center;
 }
+
 .photoInputs {
-    display: flex;
-    flex-direction: column;
-    padding: 5px 73px;
-    justify-content: start;
+	display: flex;
+	flex-direction: column;
+	padding: 5px 73px;
+	justify-content: start;
 }
-.photoTitle , .photoCategorie{
+
+.photoTitle,
+.photoCategorie {
 	display: flex;
 	flex-direction: column;
 	margin-top: -30px;
 	padding-bottom: 15px;
 }
-.photoInputs h3{
+
+.photoInputs h3 {
 	font-size: 14px;
 	padding-bottom: 10px;
 }
-.photoInputs input{
+
+.photoInputs input {
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
 	border: none;
 	padding: 15px;
 	width: 100%;
 }
-.dropZone img{
+
+.dropZone img {
 	width: 40%;
 	padding-top: 45px;
 }
+
 .dropdown {
 	position: relative;
-  }
-  
-  .dropdown i.fa-chevron-down {
+}
+
+.dropdown i.fa-chevron-down {
 	position: absolute;
 	top: 50%;
 	right: 10px;
 	transform: translateY(-50%);
 	cursor: pointer;
 	transition: transform 0.3s ease;
-  }
-  
-  .dropdown i.fa-chevron-down.rotate {
+}
+
+.dropdown i.fa-chevron-down.rotate {
 	transform: translateY(-50%) rotate(180deg);
-  }
-  
-  .categoryOptions {
+}
+
+.categoryOptions {
 	position: absolute;
 	top: 100%;
 	left: 0;
@@ -481,28 +513,31 @@ font-family:"Work Sans";
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-  }
-  
-  .categoryOptions.hidden {
+}
+
+.categoryOptions.hidden {
 	display: none;
-  }
-  
-  .categoryOptions li {
+}
+
+.categoryOptions li {
 	padding: 10px;
 	cursor: pointer;
-  }
-  
-  .categoryOptions li:hover {
+}
+
+.categoryOptions li:hover {
 	background-color: #f2f2f2;
-  }
-  .imageContainer.styled{
+}
+
+.imageContainer.styled {
 	object-fit: cover;
 	width: 45%;
-  }
-  .imageContainer img{
+}
+
+.imageContainer img {
 	width: 100%;
 	margin: -29px;
-  }
+}
+
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------ */
 body {
 	margin: auto;
@@ -533,7 +568,6 @@ section {
 	text-decoration: none;
 	color: black;
 	padding: 0 10px;
-	font-size: 1.2em;
 }
 
 h1 {
@@ -566,9 +600,10 @@ nav ul {
 
 }
 
-nav li {
+nav li, .logout {
 	padding: 0 10px;
 	font-size: 1.2em;
+	text-shadow: 0 0 black;
 }
 
 li:hover {
@@ -604,14 +639,14 @@ li:hover {
 
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	padding-top: 70px;
 }
 
 .allBtn {
 	display: flex;
 	justify-content: center;
 	padding-bottom: 40px;
-	padding-top: 15px;
+	padding-top: 30px;
 
 }
 

@@ -68,6 +68,7 @@ section {
 .login{
 	text-decoration: none;
 	color: black;
+    font-weight: 900;
 }
 form{
     display: flex;
@@ -87,13 +88,14 @@ label{
     padding-bottom: 5px;
 }
 .btn{
-    border-radius: 40px;
-    padding: 6px 30px;
+	border-radius: 40px;
+    padding: 9px 36px;
     font-family: 'Syne';
     font-weight: 200;
     background-color: #1D6154;
     color: white;
-    margin-top: 20px;
+    margin-top: 10px;
+	margin-bottom: 25px;
 }
 
 .error-message {
@@ -111,7 +113,7 @@ label{
 
 input{
     padding: 15px 80px;
-    margin-bottom: 25px;
+    margin-bottom: 34px;
     border: none;
     box-shadow: 0 3px 18px -9px #777;
 }
@@ -147,7 +149,7 @@ nav ul {
 
 }
 nav li {
-	padding: 0 10px;
+	padding: 0 20px;
 	font-size: 1.2em;
 }
 

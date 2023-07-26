@@ -222,7 +222,6 @@ if (token) {
       }
     });
   
-
     //----------------------------------------------------------------------Add Photo to Gallery--------------------------------------------------------------------------------//
     const editGalleryPhoto = document.querySelector(".btnEdit");
     editGalleryPhoto.addEventListener('click', () => {
@@ -262,9 +261,9 @@ if (token) {
                   <input type="text" class="categories" name="category" id="photoCategory" readonly>
                   <i class="fa-solid fa-chevron-down"></i>
                   <ul class="categoryOptions hidden">
-                    <li value="Objects">Objects</li>
-                    <li value="Apartments">Apartments</li>
-                    <li value="Hotels & Restaurants">Hotels & Restaurants</li>
+                    <li value="1">Objects</li>
+                    <li value="2">Apartments</li>
+                    <li value="3">Hotels & Restaurants</li>
                   </ul>
                 </div>
               </div>
@@ -294,25 +293,22 @@ if (token) {
       
       dropdown.addEventListener('click', toggleCategoryOptions);
       
+ 
       const categoryOptionItems = categoryOptions.querySelectorAll('li');
       categoryOptionItems.forEach(option => {
         option.addEventListener('click', () => {
-          const selectedCategory = option.getAttribute('value');
-          categoryInput.value = selectedCategory;
-      
+          const selectedCategoryValue = option.getAttribute('value'); // Get the 'value' attribute of the selected option
+          categoryInput.value = option.textContent; // Set the input field value to the selected option's text
+       // Adding this part to store the selected value in newWork
+    newWorkCategory = selectedCategoryValue;
           // Hide the dropdown after an option is clicked
           setTimeout(() => {
             categoryOptions.classList.add('hidden');
             chevronIcon.classList.remove('rotate');
           }, 200);
-      
-          // Display the selected option in the input field
-          categoryInput.value = selectedCategory;
         });
       });
       
-
-    
       // Adding file drop zone functionality
       const dropZone = document.querySelector('.dropZone');
       const selectPhoto = document.querySelector('.selectPhoto');
@@ -386,68 +382,67 @@ if (token) {
         fileInput.click();
       });
     
-  
       // Adding photo upload functionality 
-      const form = document.querySelector('form');
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-    
-        const titleInput = document.querySelector('.photoTitle input');
-        const selectedTitle = titleInput.value.trim();
-        const selectedCategory = categoryInput.value; // Retrieve the selected category
-    
-        if (selectedFile && selectedTitle) {
-          const reader = new FileReader();
-          reader.onload = async () => {
-            const imageContainer = document.createElement('div');
-            const image = document.createElement('img');
-            const title = document.createElement('p');
-    
-            image.src = reader.result;
-            title.textContent = selectedTitle;
-    
-            imageContainer.appendChild(image);
-            imageContainer.appendChild(title);
-            gallery.appendChild(imageContainer);
-    
-            // Prepare the data to be sent to the API
-            const formData = new FormData();
-            formData.append('image', selectedFile);
-            formData.append('title', selectedTitle);
-            formData.append('category', selectedCategory);
-    
-            try {
-              const response = await fetch('http://localhost:5678/api/works', {
-                method: 'POST',
-                headers: {
-                  'Authorization': 'Bearer '+ token                },
-                body: formData,
-              });
-    
-              if (response.ok) {
-                // API call was successful
-                const data = await response.json();
-                console.log('API response:', data);
-              } else {
-                // API call failed
-                console.error('API request failed:', response.status);
-                console.log(token);
-              }
-            } catch (error) {
-              console.error('API request failed:', error);
-            }
-          };
-          reader.readAsDataURL(selectedFile);
-    
-          // Reset values
-          titleInput.value = '';
-          categoryInput.value = '';
-          dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Ajouter Photo</span>';
+let newWorkCategory;
+const form = document.querySelector('form');
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const titleInput = document.querySelector('.photoTitle input');
+  const selectedTitle = titleInput.value.trim();
+  if (selectedFile && selectedTitle) {
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const imageContainer = document.createElement('div');
+      const image = document.createElement('img');
+      const title = document.createElement('p');
+
+      image.src = reader.result;
+      title.textContent = selectedTitle;
+
+      imageContainer.appendChild(image);
+      imageContainer.appendChild(title);
+      gallery.appendChild(imageContainer);
+
+      // Prepare the data to be sent to the API
+      const newWork = {
+        'image': selectedFile.name,
+        'title': selectedTitle,
+        'category': newWorkCategory
+      }
+
+      try {
+        const response = await fetch('http://localhost:5678/api/works', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + token
+          },
+          body: newWork,
+        });
+       
+        if (response.ok) {
+          // API call was successful
+          const data = await response.json();
+          console.log('API response:', data);
         } else {
-          alert("Please select a photo and enter a title before submitting.");
+          // API call failed
+          console.error('API request failed:', response.status);
+          console.log(token);
         }
-      });
-    });
+      } catch (error) {
+        console.error('API request failed:', error);
+      }
+    };
+    reader.readAsDataURL(selectedFile);
+
+    // Reset values
+    titleInput.value = '';
+    categoryInput.value = '';
+    dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Ajouter Photo</span>';
+  } else {
+    alert("Please select a photo and enter a title before submitting.");
+  }
+})
+    })
   }
 
 }
