@@ -237,7 +237,7 @@ if (token) {
               <h2>Ajouter Photo</h2>
             </div>
             <div class="return">
-              <a href="./index.html">
+              <a href="#">
                 <i class="fa-solid fa-xmark" style="color: #000000;"></i>
               </a>
             </div>
@@ -258,13 +258,11 @@ if (token) {
               <div class="photoCategory">
                 <h3>Category</h3>
                 <div class="dropdown">
-                  <input type="text" class="categories" name="category" id="photoCategory" readonly>
-                  <i class="fa-solid fa-chevron-down"></i>
-                  <ul class="categoryOptions hidden">
-                    <li value="1">Objects</li>
-                    <li value="2">Apartments</li>
-                    <li value="3">Hotels & Restaurants</li>
-                  </ul>
+                  <select class="categoryOptions">
+                    <option value="1">Objects</option>
+                    <option value="2">Apartments</option>
+                    <option value="3">Hotels & Restaurants</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -277,37 +275,29 @@ if (token) {
       `
       const categoryInput = document.querySelector('#photoCategory');
       const dropdown = document.querySelector('.dropdown');
-      const chevronIcon = document.querySelector('.fa-chevron-down');
-      const categoryOptions = document.querySelector('.categoryOptions');
       const backBtn = document.querySelector('.arrow');
-     
+        
+ // Adding event listener to dynamically created exit button
+ const galleryWindow = document.querySelector('.galleryWindow');
+ galleryWindow.addEventListener('click', (event) => {
+   const exitBtn = event.target.closest('.return a');
+   if (exitBtn) {
+
+     // Redirect to index.html
+     window.location.href = './index.html';
+   }
+ });
       backBtn.addEventListener('click', (event) => {
         event.preventDefault();
         handleEditGallery(); // Call the function to go back to the previous code
       });
-      
-      function toggleCategoryOptions() {
-        categoryOptions.classList.toggle('hidden');
-        chevronIcon.classList.toggle('rotate');
-      }
-      
-      dropdown.addEventListener('click', toggleCategoryOptions);
-      
  
-      const categoryOptionItems = categoryOptions.querySelectorAll('li');
-      categoryOptionItems.forEach(option => {
-        option.addEventListener('click', () => {
-          const selectedCategoryValue = option.getAttribute('value'); // Get the 'value' attribute of the selected option
-          categoryInput.value = option.textContent; // Set the input field value to the selected option's text
-       // Adding this part to store the selected value in newWork
-    newWorkCategory = selectedCategoryValue;
-          // Hide the dropdown after an option is clicked
-          setTimeout(() => {
-            categoryOptions.classList.add('hidden');
-            chevronIcon.classList.remove('rotate');
-          }, 200);
-        });
+      // Event listener for the category dropdown
+      const categoryDropdown = document.querySelector('.categoryOptions');
+      categoryDropdown.addEventListener('change', () => {
+        newWorkCategory = categoryDropdown.value; // Store the selected category value in the variable
       });
+      
       
       // Adding file drop zone functionality
       const dropZone = document.querySelector('.dropZone');
@@ -327,66 +317,40 @@ if (token) {
         dropZone.appendChild(imageContainer);
       };
     
-      // Adding file drop functionality
-      dropZone.addEventListener('drop', (event) => {
-        event.preventDefault();
-    
-        const file = event.dataTransfer.files[0];
-    
-        if (file.size > 4 * 1024 * 1024) {
-          alert("The file exceeds the maximum allowed size (4 MB).");
-          return;
-        }
-    
-        if (!file.type.startsWith("image/")) {
-          alert("The file must be an image.");
-          return;
-        }
-    
-        selectedFile = file;
-    
-        // Display the selected photo in the drop zone
-        displaySelectedPhoto(file);
-      });
-    
-      dropZone.addEventListener('dragover', (event) => {
-        event.preventDefault();
-      });
-    
-      // Adding photo upload functionality on clicking the "+ Add Photo" button
-      selectPhoto.addEventListener('click', () => {
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.accept = 'image/jpeg, image/png'; // Limit to JPEG and PNG formats
-        fileInput.addEventListener('change', () => {
-          const file = fileInput.files[0];
-    
-          if (file) {
-            if (file.size > 4 * 1024 * 1024) {
-              alert("The file exceeds the maximum allowed size (4 MB).");
-              return;
-            }
-    
-            if (!file.type.startsWith("image/")) {
-              alert("The file must be an image in JPEG or PNG format.");
-              return;
-            }
-    
-            selectedFile = file;
-    
-            // Display the selected photo in the drop zone
-            displaySelectedPhoto(file);
-          }
-        });
-    
-        fileInput.click();
-      });
-    
-      // Adding photo upload functionality 
+      
+    // Adding photo upload functionality on clicking the "+ Add Photo" button
+selectPhoto.addEventListener('click', () => {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'image/jpeg, image/png'; // Limit to JPEG and PNG formats
+  fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    const fileSizeLimit = 4 * 1024 * 1024;
+    if (file.size > fileSizeLimit) {
+      alert("Error: File size exceeds 4 MB");
+      fileInput.value = "";
+      return;
+    }
+
+    selectedFile = file;
+
+    // Display the selected photo in the drop zone
+    displaySelectedPhoto(file);
+  });
+
+  fileInput.click();
+});
+
+// Adding photo upload functionality 
 let newWorkCategory;
 const form = document.querySelector('form');
-form.addEventListener('submit', (event) => {
+form.addEventListener('submit', async (event) => {
   event.preventDefault();
+
+  // Store the selected category value in the variable newWorkCategory
+  const categoryDropdown = document.querySelector('.categoryOptions');
+  newWorkCategory = categoryDropdown.value;
+
   const titleInput = document.querySelector('.photoTitle input');
   const selectedTitle = titleInput.value.trim();
   if (selectedFile && selectedTitle) {
@@ -404,11 +368,12 @@ form.addEventListener('submit', (event) => {
       gallery.appendChild(imageContainer);
 
       // Prepare the data to be sent to the API
-      const newWork = {
-        'image': selectedFile.name,
-        'title': selectedTitle,
-        'category': newWorkCategory
-      }
+      const formData = new FormData();
+      formData.append('image', selectedFile);
+      formData.append('title', selectedTitle);
+      formData.append('category', parseInt(newWorkCategory));
+
+      console.log(formData);
 
       try {
         const response = await fetch('http://localhost:5678/api/works', {
@@ -416,13 +381,14 @@ form.addEventListener('submit', (event) => {
           headers: {
             'Authorization': 'Bearer ' + token
           },
-          body: newWork,
+          body: formData,
         });
-       
+
         if (response.ok) {
           // API call was successful
           const data = await response.json();
           console.log('API response:', data);
+
         } else {
           // API call failed
           console.error('API request failed:', response.status);
@@ -431,18 +397,19 @@ form.addEventListener('submit', (event) => {
       } catch (error) {
         console.error('API request failed:', error);
       }
+
     };
     reader.readAsDataURL(selectedFile);
 
     // Reset values
     titleInput.value = '';
-    categoryInput.value = '';
-    dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Ajouter Photo</span>';
+    categoryDropdown.value = ''; // Clear the selected category value
+    dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Add Photo</span>';
   } else {
     alert("Please select a photo and enter a title before submitting.");
   }
 })
-    })
+})
   }
 
 }
