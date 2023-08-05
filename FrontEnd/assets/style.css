@@ -254,6 +254,8 @@ table {
 	border-radius: 10px;
 }
 
+  
+
 .galleryPhoto.update .exit .title h2 {
 	color: black;
 	font-size: 26px;
@@ -334,6 +336,7 @@ table {
 
 .deleteGallery {
 	color: red;
+	cursor: pointer;
 	font-family: 'Syne';
 	text-align: center;
 	font-weight: 500;

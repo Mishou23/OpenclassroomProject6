@@ -202,25 +202,48 @@ if (token) {
     }
   
     const deleteGallery = document.querySelector(".deleteGallery p");
-    deleteGallery.addEventListener('click', (event) => {
-      event.preventDefault();
-      fullData.length = 0;
-      gallery.innerHTML = '';
-      allPhotosContainer.innerHTML = '';
-      // Redirect to "./index.html" after a short delay
-      setTimeout(() => {
-        window.location.href = "./index.html";
-      }, 500);
-    });
+deleteGallery.addEventListener('click', async (event) => {
+  event.preventDefault();
+
+    // Clear the gallery on the webpage
+    const gallery = document.querySelector('.gallery');
+    gallery.innerHTML = '';
+
+   fullData.length = 0 ;
+    // Clear the container for all photos on the webpage
+    const allPhotosContainer = document.querySelector('.allPhotos');
+    allPhotosContainer.innerHTML = '';
   
-    // Add event listener to detect click outside .galleryWindow
-    document.addEventListener('mousedown', (event) => {
-      const isOutsideGalleryWindow = !event.target.closest('.galleryWindow');
-      if (isOutsideGalleryWindow) {
-        // Redirect to index.html
-        window.location.href = './index.html';
-      }
-    });
+    // Redirect to "./index.html" after a short delay
+    setTimeout(() => {
+      window.location.href = "./index.html";
+    }, 500);
+  
+});
+
+   
+// Function to check if an element is scrollable
+function isScrollable(el) {
+  return el.scrollHeight > el.clientHeight;
+}
+
+// Function to handle the click event outside .galleryWindow
+function handleOutsideClick(event) {
+  const galleryWindow = document.querySelector('.galleryWindow');
+  const isOutsideGalleryWindow = !galleryWindow.contains(event.target);
+  const isScrolling = isScrollable(event.target);
+
+  if (isOutsideGalleryWindow && !isScrolling) {
+    // Redirect to index.html
+    window.location.href = './index.html';
+  }
+}
+
+// Add event listener to detect click outside .galleryWindow
+document.addEventListener('mousedown', handleOutsideClick);
+
+
+
   
     //----------------------------------------------------------------------Add Photo to Gallery--------------------------------------------------------------------------------//
     const editGalleryPhoto = document.querySelector(".btnEdit");
