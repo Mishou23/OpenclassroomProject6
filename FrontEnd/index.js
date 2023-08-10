@@ -145,10 +145,14 @@ if (token) {
   //------------------------------------------------------------------Gallery Modale------------------------------------------------------------------------------------//
   galleryPhoto.style.setProperty('--my-variable', 'your-value');
   editGallery.addEventListener('click', handleEditGallery);
+
   function handleEditGallery() {
     galleryPhoto.classList.add('update');
     background.classList.add('update');
-    galleryPhoto.innerHTML = '<div class="galleryWindow"><div class="exit"><div class="exitContainer"><div class="title"><h2>Galerie photo</h2></div><div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div><div class="allPhotos"></div><div class="galleryEdited"><button class="btnEdit">Ajouter une photo</button><div class="deleteGallery"><p>Supprimer la galerie</p></div></div></div></div>';
+    galleryPhoto.innerHTML = '<div class="galleryWindow"><div class="exit"><div class="exitContainer"><div class="title"><h2>Galerie photo</h2></div> <div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div><div class="allPhotos"></div><div class="galleryEdited"><button class="btnEdit">Ajouter une photo</button><div class="deleteGallery"><p>Supprimer la galerie</p></div></div></div></div>';
+ // Get the cross icon element
+  const crossIcon = document.querySelector('.return a .fa-xmark');
+
     const allPhotosContainer = document.querySelector('.allPhotos');
   
     // Add all the images to the gallery
@@ -209,16 +213,33 @@ deleteGallery.addEventListener('click', async (event) => {
     const gallery = document.querySelector('.gallery');
     gallery.innerHTML = '';
 
-   fullData.length = 0 ;
-    // Clear the container for all photos on the webpage
-    const allPhotosContainer = document.querySelector('.allPhotos');
-    allPhotosContainer.innerHTML = '';
-  
-    // Redirect to "./index.html" after a short delay
-    setTimeout(() => {
-      window.location.href = "./index.html";
-    }, 500);
-  
+    const longueurDonnees = fullData.length;
+
+    for (let i = 0; i < longueurDonnees; i++) {
+      const photoId = fullData[i].id;
+    
+      // Faire une requête DELETE vers le point d'extrémité de l'API pour supprimer la photo
+      fetch(`http://localhost:5678/api/works/${photoId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+        body: `${photoId}`
+      })
+      .then(response => {
+        if (response.ok) {
+          // Suppression de la photo réussie
+          // Retirer la photo du tableau fullData
+          fullData.splice(i, 1);
+          // Retirer le conteneur de l'image de la galerie
+          imageContainer.remove();
+          console.log('SUCCÈS !!');
+        } else {
+          // Échec de la suppression de la photo
+          console.error('Échec de la suppression de la photo :', response.status);
+        }
+      });
+    }
 });
 
    
@@ -242,11 +263,9 @@ function handleOutsideClick(event) {
 // Add event listener to detect click outside .galleryWindow
 document.addEventListener('mousedown', handleOutsideClick);
 
-
-
-  
     //----------------------------------------------------------------------Add Photo to Gallery--------------------------------------------------------------------------------//
     const editGalleryPhoto = document.querySelector(".btnEdit");
+    const exitBtn = document.querySelector('.return a');
     editGalleryPhoto.addEventListener('click', () => {
       const galleryPhoto = document.querySelector(".galleryPhoto");
       galleryPhoto.innerHTML = `
@@ -260,9 +279,7 @@ document.addEventListener('mousedown', handleOutsideClick);
               <h2>Ajouter Photo</h2>
             </div>
             <div class="return">
-              <a href="#">
-                <i class="fa-solid fa-xmark" style="color: #000000;"></i>
-              </a>
+            <a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a>
             </div>
           </div>
           <div class="dropZone">
@@ -296,25 +313,13 @@ document.addEventListener('mousedown', handleOutsideClick);
         </div>
         </div>
       `
-      const categoryInput = document.querySelector('#photoCategory');
-      const dropdown = document.querySelector('.dropdown');
-      const backBtn = document.querySelector('.arrow');
-        
- // Adding event listener to dynamically created exit button
- const galleryWindow = document.querySelector('.galleryWindow');
- galleryWindow.addEventListener('click', (event) => {
-   const exitBtn = event.target.closest('.return a');
-   if (exitBtn) {
 
-     // Redirect to index.html
-     window.location.href = './index.html';
-   }
- });
+ const backBtn = document.querySelector('.arrow')
       backBtn.addEventListener('click', (event) => {
         event.preventDefault();
         handleEditGallery(); // Call the function to go back to the previous code
       });
- 
+      
       // Event listener for the category dropdown
       const categoryDropdown = document.querySelector('.categoryOptions');
       categoryDropdown.addEventListener('change', () => {
@@ -428,9 +433,11 @@ form.addEventListener('submit', async (event) => {
     titleInput.value = '';
     categoryDropdown.value = ''; // Clear the selected category value
     dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Add Photo</span>';
+
   } else {
     alert("Please select a photo and enter a title before submitting.");
   }
+
 })
 })
   }

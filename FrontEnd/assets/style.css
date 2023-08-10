@@ -396,7 +396,9 @@ table {
 	font-size: 17px;
 	top: -25px;
 }
-
+#photoTitle {
+	padding: 15px;
+}
 .dropZone {
 	height: 166px;
 	max-width: 450px;
@@ -505,7 +507,7 @@ table {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-top: none;
-	height: 30px;
+	height: 50px;
 	overflow-y: auto;
 	list-style-type: none;
 	padding: 0;
