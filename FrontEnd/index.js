@@ -265,7 +265,6 @@ document.addEventListener('mousedown', handleOutsideClick);
 
     //----------------------------------------------------------------------Add Photo to Gallery--------------------------------------------------------------------------------//
     const editGalleryPhoto = document.querySelector(".btnEdit");
-    const exitBtn = document.querySelector('.return a');
     editGalleryPhoto.addEventListener('click', () => {
       const galleryPhoto = document.querySelector(".galleryPhoto");
       galleryPhoto.innerHTML = `

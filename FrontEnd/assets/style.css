@@ -243,6 +243,7 @@ table {
 	justify-content: center;
 	display: flex;
 	width: 96%;
+	
 }
 
 .galleryWindow {
@@ -268,6 +269,8 @@ table {
 	font-size: 17px;
 	top: -40px;
 }
+
+
 
 .exitContainer .title {
 	display: flex;
@@ -372,7 +375,8 @@ table {
 	position: relative;
 	z-index: 2;
 	top: 24px;
-	font-size: 17px;
+width: 50%;
+	font-size: 20px;
 	left: 17px;
 }
 
