@@ -243,7 +243,7 @@ table {
 	justify-content: center;
 	display: flex;
 	width: 96%;
-	
+
 }
 
 .galleryWindow {
@@ -255,7 +255,7 @@ table {
 	border-radius: 10px;
 }
 
-  
+
 
 .galleryPhoto.update .exit .title h2 {
 	color: black;
@@ -375,7 +375,7 @@ table {
 	position: relative;
 	z-index: 2;
 	top: 24px;
-width: 50%;
+	width: 50%;
 	font-size: 20px;
 	left: 17px;
 }
@@ -400,9 +400,11 @@ width: 50%;
 	font-size: 17px;
 	top: -25px;
 }
+
 #photoTitle {
 	padding: 15px;
 }
+
 .dropZone {
 	height: 166px;
 	max-width: 450px;
@@ -518,14 +520,14 @@ width: 50%;
 	margin: 0;
 }
 
-.categoryOptions option{
+.categoryOptions option {
 	padding: 10px;
 	cursor: pointer;
-  }
+}
 
 .categoryOptions option:hover {
 	background-color: #f2f2f2;
-  }
+}
 
 .imageContainer.styled {
 	object-fit: cover;
@@ -560,7 +562,14 @@ section {
 }
 
 .instaLogo {
-	height: 18px;
+	width: 22px;
+	/* Adjust the width as needed */
+	height: 22px;
+	/* Adjust the height as needed */
+	fill: #000000;
+	/* Change the fill color to your desired color */
+	stroke: none;
+	/* Remove any strokes */
 }
 
 .login {
@@ -599,9 +608,10 @@ nav ul {
 
 }
 
-nav li, .logout {
+nav li,
+.logout {
 	padding: 0 10px;
-	font-size: 1.2em;
+	font-size: 16px;
 	text-shadow: 0 0 black;
 }
 

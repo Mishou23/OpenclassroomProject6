@@ -18,7 +18,8 @@ console.log(fullData);
 const allBtn = document.querySelector('.btn.all');
 allBtn.addEventListener('click', () => {
   // Vider la galerie existante
-  gallery.innerHTML = '';``
+  gallery.innerHTML = '';
+  ``
 
   // Ajouter tous les éléments à la galerie
   for (let i = 0; i < fullData.length; i++) {
@@ -47,7 +48,7 @@ categoryHotRes.innerHTML = categoryData[2].name;
 
 const objectBtn = document.querySelector('.btn.objects');
 objectBtn.addEventListener('click', () => {
-  const filterObject = fullData.filter(function(data) {
+  const filterObject = fullData.filter(function (data) {
     return data.category.name === "Objets";
   });
 
@@ -70,7 +71,7 @@ objectBtn.addEventListener('click', () => {
 
 const aptBtn = document.querySelector('.btn.apt');
 aptBtn.addEventListener('click', () => {
-  const filterApt = fullData.filter(function(data) {
+  const filterApt = fullData.filter(function (data) {
     return data.category.name === "Appartements";
   });
 
@@ -93,7 +94,7 @@ aptBtn.addEventListener('click', () => {
 
 const hotResBtn = document.querySelector('.btn.hotel-res');
 hotResBtn.addEventListener('click', () => {
-  const filterHotRes = fullData.filter(function(data) {
+  const filterHotRes = fullData.filter(function (data) {
     return data.category.name === "Hotels & restaurants";
   });
 
@@ -150,11 +151,11 @@ if (token) {
     galleryPhoto.classList.add('update');
     background.classList.add('update');
     galleryPhoto.innerHTML = '<div class="galleryWindow"><div class="exit"><div class="exitContainer"><div class="title"><h2>Galerie photo</h2></div> <div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div><div class="allPhotos"></div><div class="galleryEdited"><button class="btnEdit">Ajouter une photo</button><div class="deleteGallery"><p>Supprimer la galerie</p></div></div></div></div>';
- // Get the cross icon element
-  const crossIcon = document.querySelector('.return a .fa-xmark');
+    // Get the cross icon element
+    const crossIcon = document.querySelector('.return a .fa-xmark');
 
     const allPhotosContainer = document.querySelector('.allPhotos');
-  
+
     // Add all the images to the gallery
     for (let i = 0; i < fullData.length; i++) {
       const imageContainer = document.createElement("div");
@@ -164,104 +165,104 @@ if (token) {
       const title = document.createElement("p");
       title.textContent = "éditer";
       image.src = fullData[i].imageUrl;
-  
+
       deleteIcon.className = "fa-solid fa-trash-can";
       deleteButton.appendChild(deleteIcon); // Append the delete icon to the delete button
       deleteButton.classList.add("delete-button"); // Add a class for styling
-  
+
       // Add event listener to delete the photo on button click
       deleteButton.addEventListener('click', () => {
         const photoId = fullData[i].id;
-  
+
         // Make a DELETE request to the API endpoint to delete the photo
         fetch(`http://localhost:5678/api/works/${photoId}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': 'Bearer '+ token
-          },
-          body:`${photoId}`
-         })
-        .then(response => {
-          if (response.ok) {
-            // Photo deletion successful
-            // Remove the photo from the fullData array
-            fullData.splice(i, 1);
-            // Remove the image container from the gallery
-            imageContainer.remove();
-            console.log('SUCCESS!!');
-          } else {
-            // Photo deletion failed
-            console.error('Failed to delete photo:', response.status);
-          }
-        })
-        .catch(error => {
-          console.error('Failed to delete photo:', error);
-        });
+            method: 'DELETE',
+            headers: {
+              'Authorization': 'Bearer ' + token
+            },
+            body: `${photoId}`
+          })
+          .then(response => {
+            if (response.ok) {
+              // Photo deletion successful
+              // Remove the photo from the fullData array
+              fullData.splice(i, 1);
+              // Remove the image container from the gallery
+              imageContainer.remove();
+              console.log('SUCCESS!!');
+            } else {
+              // Photo deletion failed
+              console.error('Failed to delete photo:', response.status);
+            }
+          })
+          .catch(error => {
+            console.error('Failed to delete photo:', error);
+          });
       })
-  //------------------------------------------------DELETE BUTTON---------------------------------------------------------------------------------------
+      //------------------------------------------------DELETE BUTTON---------------------------------------------------------------------------------------
       imageContainer.appendChild(image);
       imageContainer.appendChild(title);
       imageContainer.appendChild(deleteButton); // Append the delete button to the image container
       allPhotosContainer.appendChild(imageContainer);
     }
-  
+
     const deleteGallery = document.querySelector(".deleteGallery p");
-deleteGallery.addEventListener('click', async (event) => {
-  event.preventDefault();
+    deleteGallery.addEventListener('click', async (event) => {
+      event.preventDefault();
 
-    // Clear the gallery on the webpage
-    const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = '';
+      // Clear the gallery on the webpage
+      const gallery = document.querySelector('.gallery');
+      gallery.innerHTML = '';
 
-    const longueurDonnees = fullData.length;
+      const longueurDonnees = fullData.length;
 
-    for (let i = 0; i < longueurDonnees; i++) {
-      const photoId = fullData[i].id;
-    
-      // Faire une requête DELETE vers le point d'extrémité de l'API pour supprimer la photo
-      fetch(`http://localhost:5678/api/works/${photoId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': 'Bearer ' + token
-        },
-        body: `${photoId}`
-      })
-      .then(response => {
-        if (response.ok) {
-          // Suppression de la photo réussie
-          // Retirer la photo du tableau fullData
-          fullData.splice(i, 1);
-          // Retirer le conteneur de l'image de la galerie
-          imageContainer.remove();
-          console.log('SUCCÈS !!');
-        } else {
-          // Échec de la suppression de la photo
-          console.error('Échec de la suppression de la photo :', response.status);
-        }
-      });
+      for (let i = 0; i < longueurDonnees; i++) {
+        const photoId = fullData[i].id;
+
+        // Faire une requête DELETE vers le point d'extrémité de l'API pour supprimer la photo
+        fetch(`http://localhost:5678/api/works/${photoId}`, {
+            method: 'DELETE',
+            headers: {
+              'Authorization': 'Bearer ' + token
+            },
+            body: `${photoId}`
+          })
+          .then(response => {
+            if (response.ok) {
+              // Suppression de la photo réussie
+              // Retirer la photo du tableau fullData
+              fullData.splice(i, 1);
+              // Retirer le conteneur de l'image de la galerie
+              imageContainer.remove();
+              console.log('SUCCÈS !!');
+            } else {
+              // Échec de la suppression de la photo
+              console.error('Échec de la suppression de la photo :', response.status);
+            }
+          });
+      }
+    });
+
+
+    // Function to check if an element is scrollable
+    function isScrollable(el) {
+      return el.scrollHeight > el.clientHeight;
     }
-});
 
-   
-// Function to check if an element is scrollable
-function isScrollable(el) {
-  return el.scrollHeight > el.clientHeight;
-}
+    // Function to handle the click event outside .galleryWindow
+    function handleOutsideClick(event) {
+      const galleryWindow = document.querySelector('.galleryWindow');
+      const isOutsideGalleryWindow = !galleryWindow.contains(event.target);
+      const isScrolling = isScrollable(event.target);
 
-// Function to handle the click event outside .galleryWindow
-function handleOutsideClick(event) {
-  const galleryWindow = document.querySelector('.galleryWindow');
-  const isOutsideGalleryWindow = !galleryWindow.contains(event.target);
-  const isScrolling = isScrollable(event.target);
+      if (isOutsideGalleryWindow && !isScrolling) {
+        // Redirect to index.html
+        window.location.href = './index.html';
+      }
+    }
 
-  if (isOutsideGalleryWindow && !isScrolling) {
-    // Redirect to index.html
-    window.location.href = './index.html';
-  }
-}
-
-// Add event listener to detect click outside .galleryWindow
-document.addEventListener('mousedown', handleOutsideClick);
+    // Add event listener to detect click outside .galleryWindow
+    document.addEventListener('mousedown', handleOutsideClick);
 
     //----------------------------------------------------------------------Add Photo to Gallery--------------------------------------------------------------------------------//
     const editGalleryPhoto = document.querySelector(".btnEdit");
@@ -313,26 +314,26 @@ document.addEventListener('mousedown', handleOutsideClick);
         </div>
       `
 
- const backBtn = document.querySelector('.arrow')
+      const backBtn = document.querySelector('.arrow')
       backBtn.addEventListener('click', (event) => {
         event.preventDefault();
         handleEditGallery(); // Call the function to go back to the previous code
       });
-      
+
       // Event listener for the category dropdown
       const categoryDropdown = document.querySelector('.categoryOptions');
       categoryDropdown.addEventListener('change', () => {
         newWorkCategory = categoryDropdown.value; // Store the selected category value in the variable
       });
-      
-      
+
+
       // Adding file drop zone functionality
       const dropZone = document.querySelector('.dropZone');
       const selectPhoto = document.querySelector('.selectPhoto');
       const gallery = document.querySelector('.gallery');
-    
+
       let selectedFile = null;
-    
+
       // Function to display the selected photo in the drop zone
       const displaySelectedPhoto = (file) => {
         const imageContainer = document.querySelector('.imageContainer');
@@ -343,102 +344,102 @@ document.addEventListener('mousedown', handleOutsideClick);
         dropZone.innerHTML = '';
         dropZone.appendChild(imageContainer);
       };
-    
-      
-    // Adding photo upload functionality on clicking the "+ Add Photo" button
-selectPhoto.addEventListener('click', () => {
-  const fileInput = document.createElement('input');
-  fileInput.type = 'file';
-  fileInput.accept = 'image/jpeg, image/png'; // Limit to JPEG and PNG formats
-  fileInput.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    const fileSizeLimit = 4 * 1024 * 1024;
-    if (file.size > fileSizeLimit) {
-      alert("Error: File size exceeds 4 MB");
-      fileInput.value = "";
-      return;
-    }
 
-    selectedFile = file;
 
-    // Display the selected photo in the drop zone
-    displaySelectedPhoto(file);
-  });
+      // Adding photo upload functionality on clicking the "+ Add Photo" button
+      selectPhoto.addEventListener('click', () => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/jpeg, image/png'; // Limit to JPEG and PNG formats
+        fileInput.addEventListener('change', (event) => {
+          const file = event.target.files[0];
+          const fileSizeLimit = 4 * 1024 * 1024;
+          if (file.size > fileSizeLimit) {
+            alert("Error: File size exceeds 4 MB");
+            fileInput.value = "";
+            return;
+          }
 
-  fileInput.click();
-});
+          selectedFile = file;
 
-// Adding photo upload functionality 
-let newWorkCategory;
-const form = document.querySelector('form');
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-
-  // Store the selected category value in the variable newWorkCategory
-  const categoryDropdown = document.querySelector('.categoryOptions');
-  newWorkCategory = categoryDropdown.value;
-
-  const titleInput = document.querySelector('.photoTitle input');
-  const selectedTitle = titleInput.value.trim();
-  if (selectedFile && selectedTitle) {
-    const reader = new FileReader();
-    reader.onload = async () => {
-      const imageContainer = document.createElement('div');
-      const image = document.createElement('img');
-      const title = document.createElement('p');
-
-      image.src = reader.result;
-      title.textContent = selectedTitle;
-
-      imageContainer.appendChild(image);
-      imageContainer.appendChild(title);
-      gallery.appendChild(imageContainer);
-
-      // Prepare the data to be sent to the API
-      const formData = new FormData();
-      formData.append('image', selectedFile);
-      formData.append('title', selectedTitle);
-      formData.append('category', parseInt(newWorkCategory));
-
-      console.log(formData);
-
-      try {
-        const response = await fetch('http://localhost:5678/api/works', {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + token
-          },
-          body: formData,
+          // Display the selected photo in the drop zone
+          displaySelectedPhoto(file);
         });
 
-        if (response.ok) {
-          // API call was successful
-          const data = await response.json();
-          console.log('API response:', data);
+        fileInput.click();
+      });
+
+      // Adding photo upload functionality 
+      let newWorkCategory;
+      const form = document.querySelector('form');
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        // Store the selected category value in the variable newWorkCategory
+        const categoryDropdown = document.querySelector('.categoryOptions');
+        newWorkCategory = categoryDropdown.value;
+
+        const titleInput = document.querySelector('.photoTitle input');
+        const selectedTitle = titleInput.value.trim();
+        if (selectedFile && selectedTitle) {
+          const reader = new FileReader();
+          reader.onload = async () => {
+            const imageContainer = document.createElement('div');
+            const image = document.createElement('img');
+            const title = document.createElement('p');
+
+            image.src = reader.result;
+            title.textContent = selectedTitle;
+
+            imageContainer.appendChild(image);
+            imageContainer.appendChild(title);
+            gallery.appendChild(imageContainer);
+
+            // Prepare the data to be sent to the API
+            const formData = new FormData();
+            formData.append('image', selectedFile);
+            formData.append('title', selectedTitle);
+            formData.append('category', parseInt(newWorkCategory));
+
+            console.log(formData);
+
+            try {
+              const response = await fetch('http://localhost:5678/api/works', {
+                method: 'POST',
+                headers: {
+                  'Authorization': 'Bearer ' + token
+                },
+                body: formData,
+              });
+
+              if (response.ok) {
+                // API call was successful
+                const data = await response.json();
+                console.log('API response:', data);
+
+              } else {
+                // API call failed
+                console.error('API request failed:', response.status);
+                console.log(token);
+              }
+            } catch (error) {
+              console.error('API request failed:', error);
+            }
+
+          };
+          reader.readAsDataURL(selectedFile);
+
+          // Reset values
+          titleInput.value = '';
+          categoryDropdown.value = ''; // Clear the selected category value
+          dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Add Photo</span>';
 
         } else {
-          // API call failed
-          console.error('API request failed:', response.status);
-          console.log(token);
+          alert("Please select a photo and enter a title before submitting.");
         }
-      } catch (error) {
-        console.error('API request failed:', error);
-      }
 
-    };
-    reader.readAsDataURL(selectedFile);
-
-    // Reset values
-    titleInput.value = '';
-    categoryDropdown.value = ''; // Clear the selected category value
-    dropZone.innerHTML = '<div class="imageIcon"><i class="fa-thin fa-image-landscape" style="color: #6f7276;"></i></div><span class="selectPhoto">+ Add Photo</span>';
-
-  } else {
-    alert("Please select a photo and enter a title before submitting.");
-  }
-
-})
-})
+      })
+    })
   }
 
 }
