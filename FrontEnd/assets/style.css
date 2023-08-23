@@ -221,6 +221,10 @@ table {
 	visibility: hidden;
 	display: none;
 }
+ ul a {
+text-decoration: none;
+color: #000000;
+}
 
 /* -------------------------------------------------------------GALLERY-MODALE---------------------------------------------------------------------------- */
 
@@ -233,8 +237,18 @@ table {
 	justify-content: center;
 	align-items: center;
 	background-color: rgba(0, 0, 0, 0.3);
-}
-
+	animation: fadeIn ease-out 3s forwards;
+	  }
+	  
+	  @keyframes fadeIn {
+		from {
+		  opacity: 0;
+		}
+		to {
+		  opacity: 1;
+		}
+	  }
+	  
 .galleryPhoto.update .exit {
 	z-index: 1;
 	margin-top: 150px;
@@ -403,12 +417,14 @@ table {
 
 #photoTitle {
 	padding: 15px;
+	border: none;
+	box-shadow: 0 3px 18px -9px #777;
 }
 
 .dropZone {
 	height: 166px;
 	max-width: 450px;
-	padding: 25px 101px;
+	padding: 25px 122px;
 	display: flex;
 	align-items: end;
 	justify-content: center;
@@ -430,6 +446,7 @@ table {
 	font-size: 14px;
 	color: rgba(48, 102, 133, 1);
 }
+
 
 .dropZoneInput {
 	display: none;
@@ -465,8 +482,9 @@ table {
 .photoInputs {
 	display: flex;
 	flex-direction: column;
-	padding: 5px 73px;
+	padding: 5px 109px;
 	justify-content: start;
+	
 }
 
 .photoTitle,
@@ -488,50 +506,44 @@ table {
 	padding-top: 45px;
 }
 
+/* Dropdown container */
 .dropdown {
 	position: relative;
-}
+  }
 
-.dropdown i.fa-chevron-down {
-	position: absolute;
-	top: 50%;
-	right: 10px;
-	transform: translateY(-50%);
-	cursor: pointer;
-	transition: transform 0.3s ease;
-}
-
-.dropdown i.fa-chevron-down.rotate {
-	transform: translateY(-50%) rotate(180deg);
-}
-
-.categoryOptions {
+  /* Dropdown select element */
+  .categoryOptions {
 	position: absolute;
 	top: 100%;
+	border: none;
+	box-shadow: 0 3px 18px -9px #777;
 	left: 0;
 	width: 100%;
 	background-color: #fff;
-	border: 1px solid #ccc;
 	border-top: none;
 	height: 50px;
 	overflow-y: auto;
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-}
-
-.categoryOptions option {
+  }
+  
+  /* Dropdown options */
+  .categoryOptions option {
 	padding: 10px;
 	cursor: pointer;
-}
-
-.categoryOptions option:hover {
-	background-color: #f2f2f2;
-}
+	transition: background-color 0.2s;
+  }
+  
+  /* Hover state */
+  .categoryOptions option:hover {
+	background-color: #E0E0E0; 
+  }
+  
 
 .imageContainer.styled {
 	object-fit: cover;
-	width: 45%;
+	width: 50%;
 }
 
 .imageContainer img {
@@ -614,9 +626,13 @@ nav li,
 	font-size: 16px;
 	text-shadow: 0 0 black;
 }
-
+.logout:hover{
+	text-shadow: 1px 0px 0px #000000;
+    font-weight: 600;
+}
 li:hover {
-	color: #B1663C;
+	text-shadow: 1px 0px 0px #000000;
+    font-weight: 600;
 }
 
 #introduction {

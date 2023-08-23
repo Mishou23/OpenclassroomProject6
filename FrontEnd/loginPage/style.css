@@ -218,7 +218,10 @@ label {
 #password-error {
 	top: -19px;
 }
-
+ ul a{
+	text-decoration: none;
+	color: #000000;
+ }
 input {
 	padding: 15px 80px;
 	margin-bottom: 34px;
