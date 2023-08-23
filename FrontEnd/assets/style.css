@@ -138,11 +138,19 @@ table {
 }
 
 /** end reset css**/
+.contentContainer{
+	padding-top: 55px;
+}
 .navbar {
 	padding: 10px;
-	background-color: black;
-	width: 100%;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    width: 100%;
+	z-index: 2;
+
 }
+
 
 .nav-content {
 	display: flex;
@@ -226,23 +234,47 @@ text-decoration: none;
 color: #000000;
 }
 
+  
+.galleryEdit.fade{
+	animation: fadeOut 5s forwards;
+	box-sizing: border-box;
+	overflow: hidden; /* Prevent content from overflowing */
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	
+	}
+	100% {
+		opacity: 0;
+		
+	}
+}
+
 /* -------------------------------------------------------------GALLERY-MODALE---------------------------------------------------------------------------- */
 
 .galleryPhoto.update {
-	position: fixed;
-	width: 100vw;
-	height: 100vh;
-	z-index: 2;
+	position: absolute;
+    width: 100%;
+    height: 541vh;
+    z-index: 2;
+    top: 61px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: rgba(0, 0, 0, 0.3);
-	animation: fadeIn ease-out 3s forwards;
+	animation: fadeIn ease-out 4s forwards;
+	box-sizing: border-box;
 	  }
 	  
 	  @keyframes fadeIn {
 		from {
 		  opacity: 0;
+		  
 		}
 		to {
 		  opacity: 1;
@@ -264,7 +296,8 @@ color: #000000;
 	content: "";
 	position: absolute;
 	width: 51%;
-	height: 580px;
+	height:  617px;
+   top: 600px;
 	background-color: white;
 	border-radius: 10px;
 }
@@ -280,7 +313,7 @@ color: #000000;
 
 .return {
 	position: relative;
-	font-size: 17px;
+	font-size: 19px;
 	top: -40px;
 }
 
@@ -300,7 +333,7 @@ color: #000000;
 	justify-content: space-between;
 	width: 100%;
 	position: relative;
-	top: -90px;
+	top: -94px;
 }
 
 .allPhotos {
@@ -313,7 +346,7 @@ color: #000000;
 	margin-bottom: 25px;
 	position: absolute;
 	max-width: 370px;
-	top: -32px;
+	top: -41px;
 }
 
 .allPhotos img {
@@ -387,15 +420,13 @@ color: #000000;
 
 .arrow {
 	position: relative;
-	z-index: 2;
 	top: 24px;
-	width: 50%;
-	font-size: 20px;
+	font-size: 23px;
 	left: 17px;
 }
 
 .ajoutPhotoTitle h2 {
-	color: black;
+	color: rgba(0, 0, 0, 1);
 	font-size: 26px;
 	font-weight: 500;
 	font-family: "Work Sans";
@@ -432,7 +463,7 @@ color: #000000;
 	font-size: 20px;
 	cursor: pointer;
 	position: relative;
-	top: -71px;
+	top: -86px;
 	border-radius: 4px;
 	background-color: rgba(232, 241, 246, 1);
 	margin: 0px auto;
@@ -467,18 +498,20 @@ color: #000000;
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
-	background-color: lightgrey;
-	margin: 5em auto;
-	width: 180px;
+	background-color: rgba(167, 167, 167, 1);
+	margin: 7em auto;
+	width: 221px;
 	border: none;
 	padding: 10px;
 	border-radius: 60px;
+	margin: 30px auto;
 }
-
 .subBtn {
 	text-align: center;
-}
-
+	position: relative; /* Add this to make sure the pseudo-element is positioned relative to the .subBtn */
+  }
+  
+  
 .photoInputs {
 	display: flex;
 	flex-direction: column;
@@ -486,18 +519,21 @@ color: #000000;
 	justify-content: start;
 	
 }
-
 .photoTitle,
 .photoCategorie {
 	display: flex;
 	flex-direction: column;
-	margin-top: -30px;
+	margin-top: -69px;
 	padding-bottom: 15px;
 }
 
 .photoInputs h3 {
 	font-size: 14px;
 	padding-bottom: 10px;
+	font-size: 14px;
+    font-weight: 600;
+    color: rgba(61, 61, 61, 1);
+    padding-bottom: 10px;
 }
 
 
@@ -511,36 +547,29 @@ color: #000000;
 	position: relative;
   }
 
-  /* Dropdown select element */
   .categoryOptions {
-	position: absolute;
-	top: 100%;
-	border: none;
+	position: relative;
+	width: 100%;
+	padding: 15px;
 	box-shadow: 0 3px 18px -9px #777;
+	border: none;
+  }
+
+  .categoryOptions::before {
+	content: "";
+	position: absolute;
+	bottom: 0;
 	left: 0;
 	width: 100%;
-	background-color: #fff;
-	border-top: none;
-	height: 50px;
-	overflow-y: auto;
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
+	height: 2px;
+	background-color: black;
   }
-  
-  /* Dropdown options */
-  .categoryOptions option {
-	padding: 10px;
-	cursor: pointer;
-	transition: background-color 0.2s;
-  }
-  
-  /* Hover state */
-  .categoryOptions option:hover {
-	background-color: #E0E0E0; 
-  }
-  
-
+.underline{
+	border-bottom: 1.5px rgba(179, 179, 179, 1) solid;
+    width: 65%;
+    margin: 0 auto;
+    padding-top: 35px;
+}
 .imageContainer.styled {
 	object-fit: cover;
 	width: 50%;
@@ -622,7 +651,7 @@ nav ul {
 
 nav li,
 .logout {
-	padding: 0 10px;
+	padding: 0 15px;
 	font-size: 16px;
 	text-shadow: 0 0 black;
 }

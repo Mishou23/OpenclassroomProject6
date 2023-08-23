@@ -146,13 +146,16 @@ if (token) {
   //------------------------------------------------------------------Gallery Modale------------------------------------------------------------------------------------//
   
   galleryPhoto.style.setProperty('--my-variable', 'your-value');
-  editGallery.addEventListener('click', handleEditGallery);
+const projetFade = document.querySelector('.galleryEdit');
 
-  function handleEditGallery() {
+editGallery.addEventListener('click', handleEditGallery);
+
+function handleEditGallery() {
+
+    galleryPhoto.innerHTML = '<div class="galleryWindow"><div class="exit"><div class="exitContainer"><div class="title"><h2>Galerie photo</h2></div> <div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div><div class="allPhotos"></div><div class="galleryEdited"><button class="btnEdit">Ajouter une photo</button><div class="deleteGallery"><p>Supprimer la galerie</p></div></div></div></div>';
+    projetFade.classList.add('fade');
     galleryPhoto.classList.add('update');
     background.classList.add('update');
-    galleryPhoto.innerHTML = '<div class="galleryWindow"><div class="exit"><div class="exitContainer"><div class="title"><h2>Galerie photo</h2></div> <div class="return"><a href="./index.html"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a></div></div><div class="allPhotos"></div><div class="galleryEdited"><button class="btnEdit">Ajouter une photo</button><div class="deleteGallery"><p>Supprimer la galerie</p></div></div></div></div>';
-   
     const allPhotosContainer = document.querySelector('.allPhotos');
 
     // Add all the images to the gallery
