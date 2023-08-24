@@ -138,8 +138,17 @@ table {
 }
 
 /** end reset css**/
-.contentContainer{
+.contentContainer.show{
 	padding-top: 55px;
+}
+.contentContainer.add{
+	position: relative;
+    bottom: 60px;
+}
+.logout{
+	font-size: 16px;
+    padding: 0 16px;
+	color: #000000;
 }
 .navbar {
 	padding: 10px;
@@ -148,7 +157,6 @@ table {
     top: 0;
     width: 100%;
 	z-index: 2;
-
 }
 
 
@@ -279,6 +287,19 @@ color: #000000;
 		to {
 		  opacity: 1;
 		}
+	  }
+
+	  .moveIcon{
+		padding: 2px 3px;
+		position: absolute;
+		border-radius: 3px;
+		z-index: 2;
+		left: 149px;
+		top: -36px;
+		background-color: #000000;
+	  }
+	  .moveIcon i{
+		font-size: 12px;
 	  }
 	  
 .galleryPhoto.update .exit {
@@ -447,16 +468,18 @@ color: #000000;
 }
 
 #photoTitle {
-	padding: 15px;
+	padding: 17px;
 	border: none;
 	box-shadow: 0 3px 18px -9px #777;
+
 }
 
 .dropZone {
-	height: 166px;
-	max-width: 450px;
-	padding: 25px 122px;
+	height: 163px;
+	max-width: 400px;
+	padding: 34px 122px;
 	display: flex;
+	flex-direction: column;
 	align-items: end;
 	justify-content: center;
 	text-align: center;
@@ -472,12 +495,29 @@ color: #000000;
 
 .selectPhoto {
 	padding: 10px 30px;
-	background-color: lightgray;
+	background-color: rgba(203, 214, 220, 1);
 	border-radius: 40px;
 	font-size: 14px;
 	color: rgba(48, 102, 133, 1);
+	font-weight: 600;
 }
-
+.imageIcon{
+	margin: 0 auto;
+    font-size: 67px;
+}
+.photoDetail{
+	font-size: 10px;
+    margin: 0px auto;
+    top: -11px;
+    position: relative;
+    color: rgba(68, 68, 68, 1);
+}
+.photoBtn{
+	padding-top: 5px;
+}
+.imageContent{
+	padding-bottom: 30px;
+}
 
 .dropZoneInput {
 	display: none;
@@ -536,12 +576,6 @@ color: #000000;
     padding-bottom: 10px;
 }
 
-
-.dropZone img {
-	width: 40%;
-	padding-top: 45px;
-}
-
 /* Dropdown container */
 .dropdown {
 	position: relative;
@@ -550,7 +584,7 @@ color: #000000;
   .categoryOptions {
 	position: relative;
 	width: 100%;
-	padding: 15px;
+	padding: 17px;
 	box-shadow: 0 3px 18px -9px #777;
 	border: none;
   }
@@ -572,12 +606,13 @@ color: #000000;
 }
 .imageContainer.styled {
 	object-fit: cover;
-	width: 50%;
+    width: 70%;
+	margin: 0 auto;
+
 }
 
 .imageContainer img {
 	width: 100%;
-	margin: -29px;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -589,13 +624,14 @@ body {
 
 .main-container {
 	max-width: 1140px;
-	margin: 0px 150px;
+	margin: 42px 150px;
+	position: relative;
+    bottom: -60px
 }
 
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
 }
 
 section {
@@ -605,8 +641,8 @@ section {
 .instaLogo {
 	width: 22px;
 	/* Adjust the width as needed */
-	height: 22px;
-	/* Adjust the height as needed */
+	position: relative;
+    height: 22px;
 	fill: #000000;
 	/* Change the fill color to your desired color */
 	stroke: none;
@@ -616,7 +652,6 @@ section {
 .login {
 	text-decoration: none;
 	color: black;
-	padding: 0 10px;
 }
 
 h1 {
@@ -649,9 +684,8 @@ nav ul {
 
 }
 
-nav li,
-.logout {
-	padding: 0 15px;
+nav li {
+	padding: 0 16px;
 	font-size: 16px;
 	text-shadow: 0 0 black;
 }

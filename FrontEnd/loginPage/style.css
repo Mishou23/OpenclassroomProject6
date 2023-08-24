@@ -134,7 +134,7 @@ table {
 
 body {
 	max-width: 1140px;
-	margin: auto;
+    margin: 0px 150px;
 	font-family: 'Work Sans';
 	font-size: 14px;
 }
@@ -142,8 +142,8 @@ body {
 .instaLogo {
 	width: 22px;
 	/* Adjust the width as needed */
-	height: 22px;
-	/* Adjust the height as needed */
+	position: relative;
+    height: 22px;
 	fill: #000000;
 	/* Change the fill color to your desired color */
 	stroke: none;
@@ -153,7 +153,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 42px 0
 }
 
 section {
@@ -169,6 +169,7 @@ section {
 	text-decoration: none;
 	color: black;
 	font-weight: 900;
+	padding: 0 16px;
 }
 
 form {
@@ -263,8 +264,8 @@ nav ul {
 }
 
 nav li {
-	padding: 0 20px;
-	font-size: 1.2em;
+	padding: 0 16px;
+	font-size: 16px;
 }
 
 li:hover {
