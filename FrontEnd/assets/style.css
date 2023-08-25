@@ -606,13 +606,15 @@ color: #000000;
 }
 .imageContainer.styled {
 	object-fit: cover;
-    width: 70%;
+    width: 85%;
 	margin: 0 auto;
 
 }
 
 .imageContainer img {
 	width: 100%;
+	display: flex;
+    align-items: center;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -687,7 +689,6 @@ nav ul {
 nav li {
 	padding: 0 16px;
 	font-size: 16px;
-	text-shadow: 0 0 black;
 }
 .logout:hover{
 	text-shadow: 1px 0px 0px #000000;

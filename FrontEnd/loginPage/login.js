@@ -52,6 +52,6 @@ connectForm.addEventListener('submit', async (event) => {
     // Clear the input fields
     document.getElementById("email").value = '';
     document.getElementById("password").value = '';
-
+    
   }
 });
