@@ -294,8 +294,8 @@ color: #000000;
 		position: absolute;
 		border-radius: 3px;
 		z-index: 2;
-		left: 149px;
 		top: -36px;
+		margin-right: 301px;
 		background-color: #000000;
 	  }
 	  .moveIcon i{
@@ -420,7 +420,8 @@ color: #000000;
 	padding: 0px 3px;
 	position: absolute;
 	border-radius: 3px;
-	margin: -99px 45px;
+    top: 4px;
+    right: 3px;
 }
 
 .delete-button i {

@@ -171,7 +171,7 @@ function handleEditGallery() {
       const title = document.createElement("p");
       title.textContent = "éditer";
       image.src = fullData[i].imageUrl;
-
+      imageContainer.style.position = 'relative';
       deleteIcon.className = "fa-solid fa-trash-can";
       deleteButton.appendChild(deleteIcon); // Append the delete icon to the delete button
       deleteButton.classList.add("delete-button"); // Add a class for styling
